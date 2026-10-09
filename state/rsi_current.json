@@ -1,0 +1,222 @@
+{
+ "as_of_month": "2026-10",
+ "model_version": "2.0.0",
+ "rsi": -0.5498,
+ "rsi_unsuppressed": -0.5498,
+ "band": "EXPANSION",
+ "coverage": 1.0,
+ "headline_status": "PUBLISHED",
+ "systems": {
+  "labor": {
+   "weight": 0.3,
+   "score": -0.4702,
+   "coverage": 1.0
+  },
+  "financial": {
+   "weight": 0.25,
+   "score": -0.4392,
+   "coverage": 1.0
+  },
+  "real_economy": {
+   "weight": 0.2,
+   "score": -0.8157,
+   "coverage": 1.0
+  },
+  "liquidity": {
+   "weight": 0.1,
+   "score": -0.7726,
+   "coverage": 1.0
+  },
+  "market": {
+   "weight": 0.1,
+   "score": -1.0,
+   "coverage": 1.0
+  },
+  "consumer": {
+   "weight": 0.05,
+   "score": 0.83,
+   "coverage": 1.0
+  }
+ },
+ "components": [
+  {
+   "system": "labor",
+   "component": "payrolls",
+   "series": "PAYEMS",
+   "unit": "thousand jobs a month (3-month average)",
+   "within_weight": 0.4,
+   "system_weight": 0.3,
+   "value": 50.6667,
+   "score": 0.3244,
+   "observation_month": "2026-09",
+   "status": "OK",
+   "contribution": 0.0389,
+   "anchors": {
+    "expansion": 150,
+    "stress": 0
+   }
+  },
+  {
+   "system": "labor",
+   "component": "claims",
+   "series": "IC4WSA",
+   "unit": "initial claims (4-week avg) per 1,000 payroll jobs",
+   "within_weight": 0.35,
+   "system_weight": 0.3,
+   "value": 1.2449,
+   "score": -1.0,
+   "observation_month": "2026-10",
+   "status": "OK",
+   "contribution": -0.105,
+   "anchors": {
+    "expansion": 1.38,
+    "stress": 1.63
+   }
+  },
+  {
+   "system": "labor",
+   "component": "unemployment",
+   "series": "UNRATE",
+   "unit": "percentage points (3-month average above its 12-month low)",
+   "within_weight": 0.25,
+   "system_weight": 0.3,
+   "value": 0.0,
+   "score": -1.0,
+   "observation_month": "2026-09",
+   "status": "OK",
+   "contribution": -0.075,
+   "anchors": {
+    "expansion": 0.1,
+    "stress": 0.5
+   }
+  },
+  {
+   "system": "financial",
+   "component": "yield_curve",
+   "series": "T10Y3M",
+   "unit": "10-year minus 3-month, percentage points",
+   "within_weight": 0.5,
+   "system_weight": 0.25,
+   "value": 1.06,
+   "score": 0.0,
+   "observation_month": "2026-10",
+   "status": "FLOORED_AFTER_INVERSION",
+   "contribution": 0.0,
+   "anchors": {
+    "expansion": 1.0,
+    "stress": 0.0
+   }
+  },
+  {
+   "system": "financial",
+   "component": "credit",
+   "series": "BAMLH0A0HYM2",
+   "unit": "high-yield option-adjusted spread, percentage points",
+   "within_weight": 0.5,
+   "system_weight": 0.25,
+   "value": 3.1217,
+   "score": -0.8783,
+   "observation_month": "2026-10",
+   "status": "OK",
+   "contribution": -0.1098,
+   "anchors": {
+    "expansion": 3.0,
+    "stress": 5.0
+   }
+  },
+  {
+   "system": "real_economy",
+   "component": "manufacturing",
+   "series": "GACDFSA066MSFRBPHI",
+   "unit": "Philly Fed diffusion index (3-month average)",
+   "within_weight": 0.6,
+   "system_weight": 0.2,
+   "value": 42.2,
+   "score": -1.0,
+   "observation_month": "2026-09",
+   "status": "OK",
+   "contribution": -0.12,
+   "anchors": {
+    "expansion": 6.0,
+    "stress": -6.0
+   }
+  },
+  {
+   "system": "real_economy",
+   "component": "housing",
+   "series": "PERMIT",
+   "unit": "building permits, 3-month average, % change on a year earlier",
+   "within_weight": 0.4,
+   "system_weight": 0.2,
+   "value": 1.5437,
+   "score": -0.5392,
+   "observation_month": "2026-08",
+   "status": "OK",
+   "contribution": -0.0431,
+   "anchors": {
+    "expansion": 5.0,
+    "stress": -10.0
+   }
+  },
+  {
+   "system": "liquidity",
+   "component": "m2",
+   "series": "M2SL",
+   "unit": "M2, % change on a year earlier",
+   "within_weight": 1.0,
+   "system_weight": 0.1,
+   "value": 5.6589,
+   "score": -0.7726,
+   "observation_month": "2026-08",
+   "status": "OK",
+   "contribution": -0.0773,
+   "anchors": {
+    "expansion": 6.0,
+    "stress": 3.0
+   }
+  },
+  {
+   "system": "market",
+   "component": "sp500_trend",
+   "series": "^GSPC",
+   "unit": "S&P 500 month-end close vs its 10-month average, %",
+   "within_weight": 1.0,
+   "system_weight": 0.1,
+   "value": 6.3097,
+   "score": -1.0,
+   "observation_month": "2026-10",
+   "status": "OK",
+   "contribution": -0.1,
+   "anchors": {
+    "expansion": 5.0,
+    "stress": -5.0
+   }
+  },
+  {
+   "system": "consumer",
+   "component": "sentiment",
+   "series": "UMCSENT",
+   "unit": "University of Michigan consumer sentiment",
+   "within_weight": 1.0,
+   "system_weight": 0.05,
+   "value": 51.7,
+   "score": 0.83,
+   "observation_month": "2026-08",
+   "status": "OK",
+   "contribution": 0.0415,
+   "anchors": {
+    "expansion": 70,
+    "stress": 50
+   }
+  }
+ ],
+ "overlays": {
+  "inflation_energy_shock": {
+   "value": 60.13,
+   "observation_month": "2026-10",
+   "unit": "WTI crude, % change on a year earlier",
+   "in_rsi": false,
+   "flag": "SHOCK"
+  }
+ }
+}

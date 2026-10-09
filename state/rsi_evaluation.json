@@ -1,0 +1,227 @@
+{
+ "evaluation": {
+  "since": "1990-01",
+  "months": 442,
+  "recessions": [
+   {
+    "recession_start": "1990-08",
+    "rsi_12_months_before": null,
+    "rsi_at_start": 0.136,
+    "first_month_at_or_above_0_2_within_24_before": null,
+    "lead_months": null,
+    "max_in_24_before": 0.136
+   },
+   {
+    "recession_start": "2001-04",
+    "rsi_12_months_before": -0.361,
+    "rsi_at_start": 0.399,
+    "first_month_at_or_above_0_2_within_24_before": "2001-01",
+    "lead_months": 3,
+    "max_in_24_before": 0.399
+   },
+   {
+    "recession_start": "2008-01",
+    "rsi_12_months_before": -0.304,
+    "rsi_at_start": 0.38,
+    "first_month_at_or_above_0_2_within_24_before": "2008-01",
+    "lead_months": 0,
+    "max_in_24_before": 0.38
+   },
+   {
+    "recession_start": "2020-03",
+    "rsi_12_months_before": -0.344,
+    "rsi_at_start": -0.215,
+    "first_month_at_or_above_0_2_within_24_before": null,
+    "lead_months": null,
+    "max_in_24_before": -0.13
+   }
+  ],
+  "alarm_level": 0.2,
+  "episodes_at_or_above_0_2": [
+   {
+    "from": "1990-09",
+    "to": "1991-05",
+    "peak": 0.53
+   },
+   {
+    "from": "2001-01",
+    "to": "2002-02",
+    "peak": 0.442
+   },
+   {
+    "from": "2002-06",
+    "to": "2002-06",
+    "peak": 0.21
+   },
+   {
+    "from": "2002-09",
+    "to": "2002-12",
+    "peak": 0.344
+   },
+   {
+    "from": "2008-01",
+    "to": "2009-07",
+    "peak": 0.648
+   },
+   {
+    "from": "2020-04",
+    "to": "2020-06",
+    "peak": 0.392
+   },
+   {
+    "from": "2025-04",
+    "to": "2025-04",
+    "peak": 0.261
+   }
+  ],
+  "false_alarms": [
+   {
+    "from": "2002-06",
+    "to": "2002-06",
+    "peak": 0.21
+   },
+   {
+    "from": "2002-09",
+    "to": "2002-12",
+    "peak": 0.344
+   },
+   {
+    "from": "2025-04",
+    "to": "2025-04",
+    "peak": 0.261
+   }
+  ],
+  "share_of_months_by_band": {
+   "EXPANSION": 0.776,
+   "LATE_CYCLE": 0.109,
+   "DETERIORATION": 0.063,
+   "RECESSIONARY_STRESS": 0.029,
+   "PANIC": 0.023
+  },
+  "mean_rsi_in_recession_months": 0.459,
+  "mean_rsi_outside_recessions": -0.343,
+  "note": "Revised-data replay with release lags; four recessions since 1990 is far too few to call any threshold calibrated."
+ },
+ "legacy": [
+  {
+   "as_of": "2026-03-27",
+   "rsi_reported": "+0.22",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.189
+  },
+  {
+   "as_of": "2026-04-14",
+   "rsi_reported": "-0.18",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.416
+  },
+  {
+   "as_of": "2026-05-11",
+   "rsi_reported": "-0.27",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.442
+  },
+  {
+   "as_of": "2026-05-22",
+   "rsi_reported": "-0.45",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.442
+  },
+  {
+   "as_of": "2026-06-01",
+   "rsi_reported": "-0.40",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.613
+  },
+  {
+   "as_of": "2026-06-10",
+   "rsi_reported": "-0.45",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.613
+  },
+  {
+   "as_of": "2026-06-23",
+   "rsi_reported": "-0.45",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "v1 heuristic",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.613
+  },
+  {
+   "as_of": "2026-07-01",
+   "rsi_reported": "-0.45 / -0.40",
+   "risk_reported": null,
+   "asset_reported": null,
+   "housing_reported": null,
+   "notes": "conflicting historical estimates",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.58
+  },
+  {
+   "as_of": "2026-07-10",
+   "rsi_reported": "-0.36 (v1); -0.42 (MIHTS)",
+   "risk_reported": "18% (earlier ~20%)",
+   "asset_reported": "84",
+   "housing_reported": "69",
+   "notes": "v2 category contributions sum to -0.415",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.58
+  },
+  {
+   "as_of": "2026-07-17",
+   "rsi_reported": "-0.46",
+   "risk_reported": "15%",
+   "asset_reported": "86",
+   "housing_reported": "66",
+   "notes": "published category scores give -0.480 under the accepted weights",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.58
+  },
+  {
+   "as_of": "2026-07-26",
+   "rsi_reported": "-0.62 to -0.66",
+   "risk_reported": "12-16%",
+   "asset_reported": "83",
+   "housing_reported": "64",
+   "notes": "Jul 24-28; category scores give -0.645",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.58
+  },
+  {
+   "as_of": "2026-09",
+   "rsi_reported": "-0.55 to -0.60 (also -0.56)",
+   "risk_reported": "12-15%",
+   "asset_reported": "78",
+   "housing_reported": "57",
+   "notes": "no single as-of date; category scores give -0.595",
+   "legacy_unverified": true,
+   "v2_recomputed_for_that_month": -0.566
+  }
+ ]
+}
