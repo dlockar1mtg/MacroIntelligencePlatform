@@ -116,10 +116,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch -q origin "${GITHUB_HEAD_REF}" && git checkout -q -B pr-snapshot "origin/${GITHUB_HEAD_REF}"
+          # The branch may already be merged and deleted by the time the run gets here: nothing to keep then.
+          if ! git fetch -q origin "${GITHUB_HEAD_REF}" 2>/dev/null; then
+            echo "::notice::Branch ${GITHUB_HEAD_REF} no longer exists (merged or deleted); snapshot not kept."
+            exit 0
+          fi
+          git checkout -q -B pr-snapshot "origin/${GITHUB_HEAD_REF}"
           git add data/snapshot
           git add -f state/abi_estimates.csv 2>/dev/null || true
-          git diff --cached --quiet || { git commit -q -m "Data snapshot $(date -u +%F) for this pull request"; git push -q origin "HEAD:${GITHUB_HEAD_REF}"; }
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Data snapshot $(date -u +%F) for this pull request"
+          git push -q origin "HEAD:${GITHUB_HEAD_REF}" \
+            || echo "::notice::Branch ${GITHUB_HEAD_REF} moved or was deleted during the run; snapshot not kept."
       - name: Keep the history and the data snapshot
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
