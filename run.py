@@ -71,8 +71,15 @@ def main(argv=None) -> int:
             print(f"::notice title=Recession {e['recession_start']}::12 months before {e['rsi_12_months_before']}, lead at 0.2: {e['lead_months']} months, max {e['max_in_24_before']}")
         print(f"::notice title=False alarms::{json.dumps(evaluation['false_alarms'])}")
         for c in current["components"]:
+            line = f"{c['value']} {c['unit']} -> score {c['score']}, adds {c['contribution']} ({c['series']}, {c['observation_month']}, {c['status']})"
             if c["status"] not in ("OK", "FLOORED_AFTER_INVERSION"):
-                print(f"::warning title=RSI {c['component']}::{c['status']} ({c['series']}, last {c['observation_month']})")
+                print(f"::warning title=RSI {c['component']}::{line}")
+            else:
+                print(f"::notice title=RSI {c['component']}::{line}")
+        print(f"::notice title=Overlay::{json.dumps(current['overlays'])}")
+        print(f"::notice title=Bands since {a.since}::{json.dumps(evaluation['share_of_months_by_band'])} | mean in recessions "
+              f"{evaluation['mean_rsi_in_recession_months']}, outside {evaluation['mean_rsi_outside_recessions']}")
+        print("::notice title=Legacy vs v2.0::" + "; ".join(f"{x['as_of']} {x['rsi_reported']} vs {x['v2_recomputed_for_that_month']}" for x in legacy))
     return 0
 
 
