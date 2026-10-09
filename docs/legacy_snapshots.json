@@ -1,0 +1,18 @@
+{
+ "source": "docs/HANDOFF_2026-10-09.md section 5: earlier analyst readings from conversations; judgment-based, changing thresholds, inconsistent arithmetic. Preserved as provenance, never merged with the v2.0 series.",
+ "legacy_unverified": true,
+ "snapshots": [
+  {"as_of": "2026-03-27", "rsi_reported": "+0.22", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-04-14", "rsi_reported": "-0.18", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-05-11", "rsi_reported": "-0.27", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-05-22", "rsi_reported": "-0.45", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-06-01", "rsi_reported": "-0.40", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-06-10", "rsi_reported": "-0.45", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-06-23", "rsi_reported": "-0.45", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "v1 heuristic"},
+  {"as_of": "2026-07-01", "rsi_reported": "-0.45 / -0.40", "risk_reported": null, "asset_reported": null, "housing_reported": null, "notes": "conflicting historical estimates"},
+  {"as_of": "2026-07-10", "rsi_reported": "-0.36 (v1); -0.42 (MIHTS)", "risk_reported": "18% (earlier ~20%)", "asset_reported": "84", "housing_reported": "69", "notes": "v2 category contributions sum to -0.415"},
+  {"as_of": "2026-07-17", "rsi_reported": "-0.46", "risk_reported": "15%", "asset_reported": "86", "housing_reported": "66", "notes": "published category scores give -0.480 under the accepted weights"},
+  {"as_of": "2026-07-26", "rsi_reported": "-0.62 to -0.66", "risk_reported": "12-16%", "asset_reported": "83", "housing_reported": "64", "notes": "Jul 24-28; category scores give -0.645"},
+  {"as_of": "2026-09", "rsi_reported": "-0.55 to -0.60 (also -0.56)", "risk_reported": "12-15%", "asset_reported": "78", "housing_reported": "57", "notes": "no single as-of date; category scores give -0.595"}
+ ]
+}

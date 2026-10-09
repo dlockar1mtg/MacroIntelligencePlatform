@@ -1,0 +1,73 @@
+{
+  "model_id": "MIHTS_RSI",
+  "model_version": "2.0.0",
+  "frozen_on": "2026-10-09",
+  "frozen_before_results": true,
+  "owner_decisions": {
+    "decided_by": "Devon Lockard",
+    "decided_on": "2026-10-09",
+    "weights": "the accepted six-system v2 weights (handoff section 2)",
+    "pmi_substitute": "Philadelphia Fed manufacturing general activity index (FRED GACDFSA066MSFRBPHI) in place of ISM manufacturing PMI, which is licensed and no longer on FRED",
+    "scoring": "continuous: each v1 neutral band becomes a straight ramp from -1 at its expansion edge to +1 at its stress edge; beyond the band the v1 score holds",
+    "oil": "overlay only (inflation_energy_shock); not in RSI v2.0",
+    "housing": "no separate housing opportunity score; the Housing Intelligence Platform's V11 cards and rate outlook are reused"
+  },
+  "scoring_rule": "score = clip(-1 + 2 * (value - expansion) / (stress - expansion), -1, +1)",
+  "systems": {
+    "labor": {"weight": 0.30, "components": {
+      "payrolls": {"weight": 0.40, "series": "PAYEMS", "transform": "diff_3m_avg", "unit": "thousand jobs a month (3-month average)",
+                   "expansion": 150, "stress": 0, "lag_months": 1, "v1": ">150k -1; 0-150k 0; <0 +1"},
+      "claims": {"weight": 0.35, "series": "IC4WSA", "transform": "per_thousand_payroll_jobs", "unit": "initial claims (4-week avg) per 1,000 payroll jobs",
+                 "expansion": 1.38, "stress": 1.63, "lag_months": 0,
+                 "v1": "<220k -1; 220-260k 0; >260k +1. Scaled by payroll employment so the thresholds mean the same thing across decades: 1.38 and 1.63 per 1,000 jobs are 220k and 260k at about 159.5 million jobs.",
+                 "context_series": "CCSA"},
+      "unemployment": {"weight": 0.25, "series": "UNRATE", "transform": "sahm", "unit": "percentage points (3-month average above its 12-month low)",
+                       "expansion": 0.1, "stress": 0.5, "lag_months": 1, "v1": "qualitative 'unemployment change'; the Sahm-rule reading triggers at 0.5"}
+    }},
+    "financial": {"weight": 0.25, "components": {
+      "yield_curve": {"weight": 0.50, "series": "T10Y3M", "transform": "level", "unit": "10-year minus 3-month, percentage points",
+                      "expansion": 1.0, "stress": 0.0, "lag_months": 0, "v1": ">1pp -1; 0-1pp 0; inverted +1",
+                      "post_inversion_floor": {"months": 24, "floor": 0.0,
+                                               "why": "a curve that has just un-inverted is not low risk: for 24 months after the last inverted month the score cannot fall below neutral"}},
+      "credit": {"weight": 0.50, "series": "BAMLH0A0HYM2", "transform": "level", "unit": "high-yield option-adjusted spread, percentage points",
+                 "expansion": 3.0, "stress": 5.0, "lag_months": 0, "v1": "<3pp -1; 3-5pp 0; >5pp +1",
+                 "fallback": {"series": "BAA10Y", "expansion": 1.8, "stress": 2.8,
+                              "why": "Moody's Baa minus 10-year, used only for months the high-yield series does not cover"}}
+    }},
+    "real_economy": {"weight": 0.20, "components": {
+      "manufacturing": {"weight": 0.60, "series": "GACDFSA066MSFRBPHI", "transform": "avg_3m", "unit": "Philly Fed diffusion index (3-month average)",
+                        "expansion": 6.0, "stress": -6.0, "lag_months": 0,
+                        "v1": "PMI >52 -1; 48-52 0; <48 +1. The Philly index swings about three times as far as the ISM around its neutral point, so +/-2 PMI points become +/-6."},
+      "housing": {"weight": 0.40, "series": "PERMIT", "transform": "yoy_3m_avg", "unit": "building permits, 3-month average, % change on a year earlier",
+                  "expansion": 5.0, "stress": -10.0, "lag_months": 1, "v1": "qualitative starts/permits trend"}
+    }},
+    "liquidity": {"weight": 0.10, "components": {
+      "m2": {"weight": 1.0, "series": "M2SL", "transform": "yoy", "unit": "M2, % change on a year earlier",
+             "expansion": 6.0, "stress": 3.0, "lag_months": 1, "v1": ">6% -1; 3-6% 0; <3% +1"}
+    }},
+    "market": {"weight": 0.10, "components": {
+      "sp500_trend": {"weight": 1.0, "series": "^GSPC", "transform": "vs_10m_avg", "unit": "S&P 500 month-end close vs its 10-month average, %",
+                      "expansion": 5.0, "stress": -5.0, "lag_months": 0, "v1": "qualitative S&P 500 trend"}
+    }},
+    "consumer": {"weight": 0.05, "components": {
+      "sentiment": {"weight": 1.0, "series": "UMCSENT", "transform": "level", "unit": "University of Michigan consumer sentiment",
+                    "expansion": 70, "stress": 50, "lag_months": 0, "v1": ">70 -1; 50-70 0; <50 +1"}
+    }}
+  },
+  "overlays": {
+    "inflation_energy_shock": {"series": "DCOILWTICO", "transform": "yoy", "unit": "WTI crude, % change on a year earlier",
+                               "shock_above": 40.0, "slump_below": -40.0, "in_rsi": false}
+  },
+  "bands": [
+    {"below": 0.0, "label": "EXPANSION"},
+    {"below": 0.2, "label": "LATE_CYCLE"},
+    {"below": 0.4, "label": "DETERIORATION"},
+    {"below": 0.6, "label": "RECESSIONARY_STRESS"},
+    {"below": 99, "label": "PANIC"}
+  ],
+  "bands_status": "provisional heuristic labels from v1, not measured recession frequencies",
+  "coverage": {"minimum": 0.80, "stale_after_extra_months": 2,
+               "rule": "a missing or stale component's weight is shared across the present components of its system; the headline is suppressed below 80% coverage"},
+  "recession_labels": "USREC",
+  "recession_probability": {"status": "NOT_PUBLISHED", "why": "uncalibrated until a walk-forward model passes (handoff 4B)"}
+}
