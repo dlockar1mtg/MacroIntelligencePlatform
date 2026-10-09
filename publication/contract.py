@@ -54,9 +54,34 @@ def validate_contract(c: dict) -> None:
         raise ContractError("system weights must sum to 1")
     if any(not s.get("legacy_unverified") for s in c.get("legacy_snapshots") or []):
         raise ContractError("legacy snapshots must stay marked unverified")
+    validate_ai_bubble(c.get("ai_bubble"))
     for h in c.get("history") or []:
         if h.get("rsi") is not None and not -1 <= h["rsi"] <= 1:
             raise ContractError("history rsi out of range")
+
+
+def validate_ai_bubble(ab: dict | None) -> None:
+    if not ab:
+        return
+    if ab.get("automatic_execution_authorized") is not False:
+        raise ContractError("ai_bubble must not authorize automatic execution")
+    if ab.get("status") == "FAILED":
+        return
+    cur = ab.get("current") or {}
+    r = cur.get("research") or {}
+    if r.get("abi") is not None:
+        if not 0 <= float(r["abi"]) <= 100:
+            raise ContractError("ai_bubble research abi out of range")
+        if abs(sum(v for v in r["contributions"].values() if v is not None) - float(r["abi"])) > 0.01:
+            raise ContractError("ai_bubble contributions do not add up to the index")
+        if r.get("missing"):
+            raise ContractError("ai_bubble published with missing factors")
+    if (cur.get("strict") or {}).get("abi") is not None:
+        raise ContractError("strict v1.0 stays blocked until licensed consensus data exists")
+    if any(not o.get("legacy_unverified") for o in ab.get("legacy_observations") or []):
+        raise ContractError("legacy ai_bubble readings must stay marked unverified")
+    if abs(sum(f["weight"] for f in cur.get("factors") or []) - 1) > 1e-9 and cur.get("factors"):
+        raise ContractError("ai_bubble weights must sum to 1")
 
 
 def write_package(directory: Path, contract: dict) -> dict:

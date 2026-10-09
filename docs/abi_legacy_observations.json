@@ -1,0 +1,12 @@
+{
+ "note": "Manual research readings from before the platform computed the index. Inputs were user-supplied and not source-verified; several are revisions of the same period, not independent observations. Never merged with the computed series and never read as a trend.",
+ "observations": [
+  {"as_of": "2026-06", "label": "June 2026, revised dataset", "abi_reported": 57.50, "legacy_unverified": true},
+  {"as_of": "2026-06-24", "label": "June 24, 2026", "abi_reported": 30.00, "legacy_unverified": true},
+  {"as_of": "2026-07", "label": "Early July 2026", "abi_reported": 47.50, "legacy_unverified": true},
+  {"as_of": "2026-07-09", "label": "July 9, 2026", "abi_reported": 45.00, "legacy_unverified": true},
+  {"as_of": "2026-07-16", "label": "July 16, 2026", "abi_reported": 38.75, "legacy_unverified": true,
+   "factor_scores": {"capex_vs_revenue_growth": 50, "capex_intensity": 50, "semis_inventory_build": 0, "mag7_concentration": 75,
+                     "forward_pe_premium": 25, "nasdaq100_breadth": 25, "eps_revisions": 25}}
+ ]
+}

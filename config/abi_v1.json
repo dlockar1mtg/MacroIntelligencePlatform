@@ -1,0 +1,94 @@
+{
+  "model_id": "MIHTS_ABI",
+  "model_version": "1.0.0",
+  "research_version": "1.0.0-R",
+  "frozen_on": "2026-10-09",
+  "frozen_before_results": true,
+  "source_handoff": "UIP_AI_Bubble_Index_Implementation_Handoff.md (Devon, 2026-10-09)",
+  "owner_decisions": {
+    "decided_by": "Devon Lockard",
+    "decided_on": "2026-10-09",
+    "home": "the Macro Intelligence Platform package and the UIP Watchtower, beside the recession indicator",
+    "consensus_factors": "labelled substitutes: v1.0-R uses a trailing P/E premium from SEC filings for factor 5 and Yahoo's 90-day estimate trend (archived daily from first collection) for factor 7; strict v1.0 stays BLOCKED until a licensed point-in-time consensus archive exists"
+  },
+  "composite": "ABI = sum(weight * factor_score); factor scores are 0/25/50/75/100; full precision, rounded for display only",
+  "missing_rule": "a missing or UNDEFINED factor is never scored as zero; the composite is withheld (status INCOMPLETE) unless every factor of the version is present",
+  "factors": {
+    "capex_vs_revenue_growth": {
+      "n": 1, "weight": 0.20, "companies": ["MSFT", "AMZN", "GOOGL", "META"], "unit": "ratio",
+      "computation": "for each company: YoY growth of standalone quarterly CapEx and of quarterly revenue (latest filed fiscal quarter vs the same fiscal quarter a year earlier); ratio = mean CapEx growth / mean revenue growth (equal-weight arithmetic means)",
+      "undefined": "mean revenue growth <= 0 -> UNDEFINED",
+      "direction": "higher_is_riskier",
+      "bands": [[null, 1.5, 0], [1.5, 2.0, 25], [2.0, 3.0, 50], [3.0, 4.0, 75, "closed"], [4.0, null, 100, "open_low"]]
+    },
+    "capex_intensity": {
+      "n": 2, "weight": 0.10, "companies": ["MSFT", "AMZN", "GOOGL", "META"], "unit": "percent",
+      "computation": "mean of each company's latest standalone quarterly CapEx / quarterly revenue, in percent",
+      "direction": "higher_is_riskier",
+      "bands": [[null, 10, 0], [10, 15, 25], [15, 20, 50], [20, 25, 75, "closed"], [25, null, 100, "open_low"]]
+    },
+    "semis_inventory_build": {
+      "n": 3, "weight": 0.15, "companies": ["NVDA", "AMD", "AVGO", "MU"], "unit": "percentage points",
+      "computation": "mean YoY growth of quarter-end inventory (vs the comparable prior-year quarter-end) minus mean YoY growth of quarterly revenue",
+      "direction": "higher_is_riskier",
+      "bands": [[null, 0, 0], [0, 5, 25], [5, 10, 50], [10, 20, 75, "closed"], [20, null, 100, "open_low"]]
+    },
+    "mag7_concentration": {
+      "n": 4, "weight": 0.20, "companies": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA"], "unit": "percent of S&P 500",
+      "computation": "current: the seven companies' combined weight in the S&P 500 from the SPDR S&P 500 ETF (SPY) daily holdings, both Alphabet share classes summed (official, float-adjusted). History (backtest only): combined market capitalization / summed market capitalization of the current S&P 500 members, from SEC shares outstanding and month-end prices (survivorship-biased reconstruction, labelled)",
+      "direction": "higher_is_riskier",
+      "bands": [[null, 20, 0], [20, 25, 25], [25, 30, 50], [30, 35, 75, "closed"], [35, null, 100, "open_low"]]
+    },
+    "forward_pe_premium": {
+      "n": 5, "weight": 0.15, "companies": ["NVDA", "MSFT", "AVGO"], "unit": "percent",
+      "computation": "v1.0: current forward P/E / own 10-year average forward P/E - 1, averaged. BLOCKED: no licensed point-in-time consensus archive",
+      "research_substitute": {
+        "id": "trailing_pe_premium",
+        "computation": "for each company: month-end price / trailing-twelve-month diluted EPS from SEC filings (split-adjusted, as filed by that date), divided by the mean of its own month-end trailing P/E over the previous 120 months (at least 60 months required) - 1; averaged over companies with positive TTM EPS (at least 2 of 3)"
+      },
+      "undefined": "zero or negative EPS for a company -> that company is UNDEFINED; fewer than 2 defined companies -> factor UNDEFINED",
+      "direction": "higher_is_riskier",
+      "bands": [[null, 0, 0], [0, 20, 25], [20, 40, 50], [40, 60, 75, "closed"], [60, null, 100, "open_low"]]
+    },
+    "nasdaq100_breadth": {
+      "n": 6, "weight": 0.10, "unit": "percent of members",
+      "computation": "share of current Nasdaq-100 members whose last close is above their 200-trading-day simple moving average (members with fewer than 200 closes are excluded and counted)",
+      "direction": "lower_is_riskier",
+      "bands": [[80, null, 0, "open_low"], [70, 80, 25, "open_low_closed_high"], [60, 70, 50, "open_low_closed_high"], [50, 60, 75, "closed"], [null, 50, 100]]
+    },
+    "eps_revisions": {
+      "n": 7, "weight": 0.10, "companies": ["NVDA", "MSFT"], "unit": "percent",
+      "computation": "v1.0: next-12-month EPS consensus / archived consensus 90 days earlier - 1, averaged. BLOCKED: no licensed archive",
+      "research_substitute": {
+        "id": "yahoo_estimate_trend_90d",
+        "computation": "for each company: Yahoo earningsTrend current-year (0y) and next-year (+1y) EPS estimates now and 90 days ago, blended to a next-12-month figure by the share of the current fiscal year remaining; revision = NTM now / NTM 90 days ago - 1; averaged. Available only from the first collection day onward (archived in state/)"
+      },
+      "direction": "lower_is_riskier",
+      "bands": [[10, null, 0, "open_low"], [5, 10, 25, "open_low_closed_high"], [0, 5, 50, "open_low_closed_high"], [-5, 0, 75, "closed"], [null, -5, 100]]
+    }
+  },
+  "band_rule": "bands are [low, high, score, kind]; default kind is low-inclusive, high-exclusive ([low, high)); 'closed' is [low, high]; 'open_low' is (low, high); 'open_low_closed_high' is (low, high]; null means unbounded. Together they cover every real number exactly once (tested).",
+  "labels": [[0, 20, "VERY_HEALTHY", "Very healthy"], [20, 40, "HEALTHY", "Healthy"], [40, 60, "ELEVATED", "Elevated"],
+             [60, 75, "SPECULATIVE", "Speculative"], [75, 90, "BUBBLE_RISK", "Bubble risk"], [90, 100, "EXTREME_BUBBLE", "Extreme bubble"]],
+  "label_rule": "0-20 inclusive is VERY_HEALTHY; every other label is (low, high]",
+  "labels_status": "heuristic descriptions of model output, not calibrated probabilities",
+  "freshness": {"fundamentals_max_age_days": 135, "market_max_age_days": 5, "estimates_max_age_days": 5},
+  "statuses": ["RESEARCH_UNVERIFIED", "VALIDATED", "PUBLISHED", "STALE", "BLOCKED", "SUPERSEDED", "INCOMPLETE"],
+  "history": {
+    "frequency": "month-end, January 2013 onward",
+    "point_in_time": "fundamentals use only facts filed on or before the month-end; prices use closes on or before it",
+    "variant": "ABI-H6: factors 1-6 of v1.0-R with factor 7's weight removed and the other weights rescaled to sum to 1 (factor 7 has no history before collection began). For the backtest only; never shown as the current score"
+  },
+  "evaluation": {
+    "registered": "2026-10-09, before any result",
+    "targets": ["QQQ forward 3-, 6- and 12-month total return", "QQQ maximum drawdown over the next 12 months", "SOXX forward 12-month return"],
+    "tests": [
+      "Spearman rank correlation of ABI-H6 at month-end with each target (overlapping monthly samples; reported with a block-bootstrap 90% interval, 12-month blocks)",
+      "Mean target by ABI-H6 tercile (low, middle, high)",
+      "Each QQQ drawdown of 20% or more since 2013: ABI-H6 in the 12 months before its peak",
+      "Months at 60+ (Speculative or worse) not followed by a 15% QQQ drawdown within 12 months (false alarms)"
+    ],
+    "warning_value_claim": "the page may say the index 'has historically preceded weaker technology returns' only if the 12-month return correlation is at or below -0.20 with a bootstrap interval excluding zero, AND the high tercile's mean 12-month drawdown is deeper than the low tercile's. Otherwise it says the backtest found no reliable warning value. Either way it is never framed as a crash probability or timing signal"
+  },
+  "legacy_observations": "docs/abi_legacy_observations.json (unverified; never merged with the computed series)"
+}

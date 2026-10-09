@@ -6,7 +6,7 @@ on:
     - cron: "40 13 * * 1-5"
   workflow_dispatch:
   pull_request:
-    paths: ["config/**", "macro/**", "publication/**", "run.py", ".github/workflows/macro-production.yml"]
+    paths: ["config/**", "macro/**", "abi/**", "publication/**", "run.py", ".github/workflows/macro-production.yml"]
 permissions:
   contents: write
 concurrency:
@@ -23,6 +23,25 @@ jobs:
           python-version: "3.11"
           cache: pip
       - run: pip install -r requirements-dev.txt && python -m pytest -q
+      - name: Fetch the AI bubble index inputs (SEC, prices, holdings, estimates; never blocks the RSI)
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python -m abi.collect data/abi state/abi_estimates.csv | tee abi-collect.log
+      - name: Report the AI bubble index inputs
+        if: always()
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json, os
+          if os.path.exists("data/abi/MANIFEST.json"):
+              m = json.load(open("data/abi/MANIFEST.json"))
+              for k, v in m["files"].items():
+                  print(f"::notice title=ABI input {k}::" + json.dumps({x: v[x] for x in v if x != "failed"}) + (f" failed {len(v['failed'])}: {' '.join(v['failed'][:40])}" if v.get("failed") else ""))
+              errs = {k: v for k, v in m["errors"].items() if not k.startswith(("daily:", "monthly:"))}
+              print("::notice title=ABI input errors::" + (json.dumps(errs)[:1500] or "none"))
+          PY
       - name: Fetch, compute, evaluate and package
         run: python run.py --fetch --snapshot data/snapshot --package uip-package --notice | tee run.log
       - name: Report the components (one step each, GitHub keeps ten notices per step)
@@ -61,6 +80,20 @@ jobs:
                   print(f"::notice title={name} reliability::" + "; ".join(f"{r['band']} n={r['months']} pred {r['mean_predicted']} obs {r['observed']}" for r in s["reliability"]))
           print(f"::notice title=Inputs now::{json.dumps(d.get('inputs'))}")
           PY
+      - name: Report the AI bubble index
+        if: always()
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json, os
+          if os.path.exists("outputs/abi.json"):
+              d = json.load(open("outputs/abi.json")); c = d.get("current") or {}; r = c.get("research") or {}
+              print(f"::notice title=ABI {r.get('version')}::{c.get('as_of_date')} index {r.get('abi')} {r.get('label')} status {r.get('status')} missing {r.get('missing')} | strict {(c.get('strict') or {}).get('status')}")
+              for f in c.get("factors") or []:
+                  print(f"::notice title=ABI factor {f['n']}::{f['name']}: {f['value']} {f['unit']} -> {f['score']} ({f['status']})")
+              e = d.get("evaluation") or {}
+              print(f"::notice title=ABI backtest::{e.get('months_with_abi')} months {e.get('first')}..{e.get('last')} | corr {json.dumps({k: v.get('spearman') for k, v in (e.get('correlations') or {}).items()})} | {(e.get('warning_value') or {}).get('statement')}")
+          PY
       - uses: actions/upload-artifact@v4
         if: github.event_name != 'pull_request'
         with:
@@ -74,7 +107,9 @@ jobs:
           path: |
             outputs/
             data/snapshot/MANIFEST.json
+            data/abi/
             run.log
+            abi-collect.log
           retention-days: 14
       - name: Keep the data snapshot on the pull-request branch (so the change can be developed on the same inputs)
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
@@ -83,13 +118,16 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch -q origin "${GITHUB_HEAD_REF}" && git checkout -q -B pr-snapshot "origin/${GITHUB_HEAD_REF}"
           git add data/snapshot
+          git add -f state/abi_estimates.csv 2>/dev/null || true
           git diff --cached --quiet || { git commit -q -m "Data snapshot $(date -u +%F) for this pull request"; git push -q origin "HEAD:${GITHUB_HEAD_REF}"; }
       - name: Keep the history and the data snapshot
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
           mkdir -p state && cp outputs/rsi_history.csv outputs/rsi_current.json outputs/rsi_evaluation.json state/
+          if [ -f outputs/abi.json ]; then python -c "import json; d=json.load(open('outputs/abi.json')); json.dump({k: d.get(k) for k in ('model_id','model_version','research_version','current','evaluation','concentration_reconstruction','taken_at_utc')}, open('state/abi_current.json','w'), indent=1); import csv; h=d.get('history') or []; w=csv.DictWriter(open('state/abi_history.csv','w',newline=''), fieldnames=list(h[0]) if h else ['month']); w.writeheader(); w.writerows(h)"; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add state data/snapshot
+          git add -f state/abi_estimates.csv state/abi_current.json state/abi_history.csv 2>/dev/null || true
           git diff --cached --quiet || git commit -m "Macro production $(date -u +%F)"
           git pull --rebase origin main && git push
