@@ -1,106 +1,123 @@
 {
- "taken_at_utc": "2026-10-09T17:24:32+00:00",
+ "taken_at_utc": "2026-10-09T20:15:46+00:00",
  "series": {
   "PAYEMS": {
    "rows": 813,
    "first": "1959-01-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/PAYEMS"
   },
   "IC4WSA": {
    "rows": 3115,
    "first": "1967-01-28",
    "last": "2026-10-03",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/IC4WSA"
   },
   "CCSA": {
    "rows": 3117,
    "first": "1967-01-07",
    "last": "2026-09-26",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/CCSA"
   },
   "UNRATE": {
    "rows": 812,
    "first": "1959-01-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/UNRATE"
   },
   "T10Y3M": {
    "rows": 11195,
    "first": "1982-01-04",
    "last": "2026-10-08",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/T10Y3M"
   },
   "BAMLH0A0HYM2": {
    "rows": 786,
    "first": "2023-10-10",
    "last": "2026-10-08",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
   },
   "BAA10Y": {
    "rows": 10192,
    "first": "1986-01-02",
    "last": "2026-10-07",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/BAA10Y"
   },
   "GACDFSA066MSFRBPHI": {
    "rows": 701,
    "first": "1968-05-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/GACDFSA066MSFRBPHI"
   },
   "PERMIT": {
    "rows": 800,
    "first": "1960-01-01",
    "last": "2026-08-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/PERMIT"
   },
   "M2SL": {
    "rows": 812,
    "first": "1959-01-01",
    "last": "2026-08-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/M2SL"
   },
   "UMCSENT": {
    "rows": 658,
    "first": "1959-05-01",
    "last": "2026-08-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/UMCSENT"
   },
   "DCOILWTICO": {
    "rows": 9517,
    "first": "1986-01-02",
    "last": "2026-10-06",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/DCOILWTICO"
   },
   "USREC": {
    "rows": 813,
    "first": "1959-01-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/USREC"
   },
   "MORTGAGE30US": {
    "rows": 2898,
    "first": "1971-04-02",
    "last": "2026-10-08",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/MORTGAGE30US"
   },
   "GS10": {
    "rows": 813,
    "first": "1959-01-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/GS10"
   },
   "TB3MS": {
    "rows": 813,
    "first": "1959-01-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/TB3MS"
   },
   "BAA": {
    "rows": 813,
    "first": "1959-01-01",
    "last": "2026-09-01",
+   "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/BAA"
   },
   "^GSPC": {
