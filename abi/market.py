@@ -17,6 +17,9 @@ def load_daily(path: Path) -> pd.DataFrame:
     return d.sort_values(["ticker", "date"])
 
 
+BREADTH_MIN_MEMBERS = 90        # of ~101; fewer counted means the price fetch partly failed
+
+
 def breadth_series(daily: pd.DataFrame, members: list[str], window: int = 200) -> pd.DataFrame:
     """Daily share of members above their 200-trading-day simple moving average (split-adjusted closes)."""
     px = daily[daily["ticker"].isin(members)].pivot(index="date", columns="ticker", values="close").sort_index()

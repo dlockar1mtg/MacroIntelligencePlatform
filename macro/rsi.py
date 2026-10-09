@@ -100,7 +100,7 @@ def transform(name: str, s: pd.Series, month: pd.Period, data: pd.DataFrame) -> 
 
 def _post_inversion(data: pd.DataFrame, series: str, month: pd.Period, months: int) -> bool:
     s = _upto(data[series], month) if series in data else pd.Series(dtype=float)
-    recent = s[s.index > month - months]
+    recent = s[s.index >= month - months]           # the last inverted month plus the next `months` months
     return bool((recent < 0).any())
 
 

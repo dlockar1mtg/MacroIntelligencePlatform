@@ -80,3 +80,7 @@ recession came from the pandemic.
   curve.
 - **Real-time data:** use ALFRED real-time vintages, so the replay sees only what was known each month.
 - **Correction to the plan text:** it says "seven recessions since 1975". There are six recession starts after January 1975 (the 1973–75 recession began earlier). The limitation shown with the number now says six. Nothing else in the plan changed.
+- **Amendment after results (2026-10-09 audit):** months whose 12-month window runs past the last published
+  NBER indicator month are now treated as unknown. Before, missing months were filled as "no recession". The
+  published reading is unchanged (12.3%). The producer also checks the probability range and the chosen
+  model's calibration.

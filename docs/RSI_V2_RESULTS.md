@@ -61,3 +61,12 @@ the S&P 500 index (month to date for October 2026).
 - **History window:** the replay starts in January 1990, which leaves the 1990 recession only seven months
   of lead-up.
 - **Sentiment lag:** FRED's Michigan sentiment trails by a month or two.
+
+## Amendments after results (2026-10-09 system audit)
+- **Curve floor length:** it now lasts the full 24 months the spec states. Before, it ended one month early
+  (`>` became `>=`). Today's reading is unchanged at −0.55.
+- **High-yield history:** FRED serves the high-yield spread only for a rolling three-year window. Each
+  snapshot now merges with the previous one instead of overwriting it, so older months stop falling back to
+  the Baa spread as the window moves. The April 2025 reading keeps its high-yield value.
+- **Failed downloads:** the package carries `data_quality`. A failed download of any index input marks it
+  DEGRADED and names the series, instead of quietly reusing yesterday's file as if it were fresh.

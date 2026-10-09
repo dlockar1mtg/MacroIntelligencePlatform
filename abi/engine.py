@@ -71,6 +71,7 @@ class Fundamentals:
         self.f = _prep(facts)
         self.cfg = cfg
         self._groups = {k: g for k, g in self.f.groupby(["ticker", "metric"])}
+        self._flow_cache: dict = {}
 
     def _known(self, ticker, metric, as_of) -> pd.DataFrame:
         g = self._groups.get((ticker, metric))
@@ -97,14 +98,11 @@ class Fundamentals:
         return g.sort_values("end")[["end", "val", "filed", "accn", "tag"]].rename(columns={"val": "value"}).reset_index(drop=True)
 
 
-_FLOW_CACHE: dict = {}
-
-
 def _flow_cached(fund: Fundamentals, ticker, metric, as_of, tag_order):
     g = fund._known(ticker, metric, as_of)
-    key = (id(fund), ticker, metric, len(g), tag_order)
-    if key in _FLOW_CACHE:
-        return _FLOW_CACHE[key]
+    key = (ticker, metric, len(g), tag_order)
+    if key in fund._flow_cache:
+        return fund._flow_cache[key]
     g = fund._latest_per_period(g[g["start"].notna()], list(tag_order), ["start", "end"])
     out = {}
     for r in g[(g["days"] >= 80) & (g["days"] <= 100)].itertuples():
@@ -120,17 +118,18 @@ def _flow_cached(fund: Fundamentals, ticker, metric, as_of, tag_order):
                 prev = None
                 continue
             if r.end not in out:
-                out[r.end] = {"end": r.end, "start": prev[0] + pd.Timedelta(days=1), "value": float(r.val) - prev[1],
+                out[r.end] = {"end": r.end, "start": pd.Timestamp(prev[0]) + pd.Timedelta(days=1), "value": float(r.val) - prev[1],
                               "filed": max(r.filed, prev[2]), "accn": r.accn, "tag": r.tag, "how": f"year-to-date {r.days} days minus the previous"}
             prev = (r.end, float(r.val), max(r.filed, prev[2]))
     res = pd.DataFrame(sorted(out.values(), key=lambda v: v["end"])) if out else pd.DataFrame(columns=["end", "start", "value", "filed", "accn", "tag", "how"])
-    _FLOW_CACHE[key] = res
+    fund._flow_cache[key] = res
     return res
 
 
 def yoy(series: pd.DataFrame, end: pd.Timestamp, value_col: str = "value") -> tuple[float | None, dict | None]:
     """Growth of the period ending `end` over the period ending about a year before (within 20 days)."""
     series = series.assign(end=pd.to_datetime(series["end"]))
+    end = pd.Timestamp(end)
     cur = series[series["end"] == end]
     if cur.empty:
         return None, None

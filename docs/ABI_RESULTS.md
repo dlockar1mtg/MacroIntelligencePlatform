@@ -108,3 +108,16 @@ from the pull-request run of 2026-10-09.
 3. **Median or revenue-weighted semiconductor factors**, so one company (Micron today) cannot dominate.
 4. **A real point-in-time consensus archive**, if a licensed source becomes available. It would unblock
    v1.0.
+
+## Amendments after results (2026-10-09 system audit)
+- **Live bar dropped:** a daily bar fetched before the 4 pm ET close is a live quote, and is now dropped.
+  Breadth today reads 60.6% instead of 61.6%; the score is still 50.
+- **Breadth coverage:** breadth needs at least 90 members counted; a partial price fetch now leaves the
+  factor INCOMPLETE.
+- **Holdings date:** the SPY holdings date must be within the market freshness limit.
+- **Estimate trend first:** the estimate trend is collected before the price requests, because it cannot be
+  backfilled.
+- **Contained failure:** validation and serialization of the bubble section run inside its own failure
+  boundary, so a bad section can never block the RSI package.
+- **Concentration check:** the history is anchored to today's official weights, so "rebuild 34.74% vs
+  official 34.75%" confirms the anchoring only. It does not validate the history.
