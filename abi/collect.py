@@ -275,6 +275,23 @@ def save_snapshot(directory: Path, archive: Path | None = None, f: Fetcher | Non
             man["errors"][name] = f"{type(exc).__name__}: {str(exc)[:300]}"
             return None
 
+    # estimate trend first: it cannot be backfilled, so it must not wait behind ~600 price requests.
+    # Appended to the archive, one row per ticker, period and collection day.
+    crumb = step("yahoo_crumb", lambda: yahoo_crumb(f))
+    if crumb:
+        rows = []
+        for sym in ("NVDA", "MSFT"):
+            got = step(f"estimates:{sym}", lambda s=sym: earnings_trend(f, s, crumb))
+            rows += [{"collected_on": now.date().isoformat(), "collected_at_utc": now.isoformat(), **r} for r in (got or [])]
+        if rows:
+            new = pd.DataFrame(rows)
+            new.to_csv(d / "estimates_today.csv", index=False)
+            man["files"]["estimates_today.csv"] = {"rows": len(new), "source": "Yahoo Finance quoteSummary earningsTrend"}
+            if archive is not None:
+                archive.parent.mkdir(parents=True, exist_ok=True)
+                old = pd.read_csv(archive) if archive.exists() else pd.DataFrame()
+                both = pd.concat([old, new]).drop_duplicates(["collected_on", "ticker", "period"], keep="last")
+                both.to_csv(archive, index=False)
     facts = step("sec_facts", lambda: sec_facts(f))
     if facts is not None:
         facts.to_csv(d / "sec_facts.csv", index=False)
@@ -329,22 +346,6 @@ def save_snapshot(directory: Path, archive: Path | None = None, f: Fetcher | Non
         man["files"]["prices_monthly.csv.gz"] = {"rows": len(mm), "tickers": int(mm["ticker"].nunique()), "failed": mfailed,
                                                  "source": "Yahoo Finance chart v8, monthly bars (first trading day of each month)"}
     (d / "splits.json").write_text(json.dumps(splits, indent=0, sort_keys=True) + "\n", encoding="utf-8")
-    # estimate trend: appended to the archive, one row per ticker, period and collection day
-    crumb = step("yahoo_crumb", lambda: yahoo_crumb(f))
-    if crumb:
-        rows = []
-        for sym in ("NVDA", "MSFT"):
-            got = step(f"estimates:{sym}", lambda s=sym: earnings_trend(f, s, crumb))
-            rows += [{"collected_on": now.date().isoformat(), "collected_at_utc": now.isoformat(), **r} for r in (got or [])]
-        if rows:
-            new = pd.DataFrame(rows)
-            new.to_csv(d / "estimates_today.csv", index=False)
-            man["files"]["estimates_today.csv"] = {"rows": len(new), "source": "Yahoo Finance quoteSummary earningsTrend"}
-            if archive is not None:
-                archive.parent.mkdir(parents=True, exist_ok=True)
-                old = pd.read_csv(archive) if archive.exists() else pd.DataFrame()
-                both = pd.concat([old, new]).drop_duplicates(["collected_on", "ticker", "period"], keep="last")
-                both.to_csv(archive, index=False)
     (d / "MANIFEST.json").write_text(json.dumps(man, indent=1) + "\n", encoding="utf-8")
     return man
 

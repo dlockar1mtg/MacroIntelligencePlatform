@@ -18,7 +18,7 @@ from macro import data as D
 from macro import evaluate as E
 from macro import recession_model as M
 from macro import rsi as R
-from publication.contract import build_contract, validate_package, write_package
+from publication.contract import build_contract, validate_ai_bubble, validate_package, write_package
 
 ROOT = Path(__file__).resolve().parent
 
@@ -30,6 +30,21 @@ def commit() -> str:
         return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     except (OSError, subprocess.CalledProcessError):
         return "0000000"
+
+
+def data_quality(snapshot: Path, cfg: dict, current: dict) -> dict:
+    """Did this run's fetch actually refresh the inputs? A failed download leaves yesterday's file in place, so the
+    reading would look current while resting on old data: say so in the package (DEGRADED) instead."""
+    mpath = Path(snapshot) / "MANIFEST.json"
+    man = json.loads(mpath.read_text()) if mpath.exists() else {}
+    rsi_series = {c["series"] for s in cfg["systems"].values() for c in s["components"].values()}
+    errors = {k: v["error"] for k, v in (man.get("series") or {}).items() if isinstance(v, dict) and v.get("error")}
+    failed_rsi = sorted(k for k in errors if k in rsi_series)
+    stale = sorted(c["component"] for c in current.get("components") or [] if c.get("status") in ("STALE", "MISSING"))
+    return {"status": "DEGRADED" if failed_rsi else "OK", "fetched_at_utc": man.get("taken_at_utc"),
+            "failed_series": failed_rsi, "other_fetch_errors": {k: v for k, v in errors.items() if k not in rsi_series},
+            "stale_components": stale,
+            "why": (f"these index inputs could not be refreshed this run and use the last good download: {', '.join(failed_rsi)}" if failed_rsi else None)}
 
 
 def main(argv=None) -> int:
@@ -64,15 +79,20 @@ def main(argv=None) -> int:
     freshness = D.latest_observations(a.snapshot)
     contract = build_contract(current=current, history=history, evaluation=evaluation, legacy=legacy, freshness=freshness,
                               cfg=cfg, source_commit=commit(), run_id=os.environ.get("GITHUB_RUN_ID"))
+    contract["data_quality"] = data_quality(a.snapshot, cfg, current)
     if probability is not None:
         contract["recession_probability"] = probability
         (a.outputs / "recession_probability.json").write_text(json.dumps(probability, indent=1) + "\n", encoding="utf-8")
     if (a.abi / "MANIFEST.json").exists():
         try:
-            contract["ai_bubble"] = ABI.section(ABI.Inputs(a.abi, a.abi_archive, ABI_ENGINE.load_config()))
+            section = ABI.section(ABI.Inputs(a.abi, a.abi_archive, ABI_ENGINE.load_config()))
+            validate_ai_bubble(section)                  # checked and serialized here, so it can never block the RSI package
+            text = json.dumps(section, indent=1)
         except Exception as exc:  # noqa: BLE001 - the bubble index never blocks the RSI package
-            contract["ai_bubble"] = {"status": "FAILED", "why": f"{type(exc).__name__}: {str(exc)[:300]}", "automatic_execution_authorized": False}
-        (a.outputs / "abi.json").write_text(json.dumps(contract["ai_bubble"], indent=1) + "\n", encoding="utf-8")
+            section = {"status": "FAILED", "why": f"{type(exc).__name__}: {str(exc)[:300]}", "automatic_execution_authorized": False}
+            text = json.dumps(section, indent=1)
+        contract["ai_bubble"] = section
+        (a.outputs / "abi.json").write_text(text + "\n", encoding="utf-8")
     manifest = write_package(a.package, contract)
     validate_package(a.package)
     summary = {"package_id": manifest["package_id"], "as_of": current["as_of_month"], "rsi": current["rsi"], "band": current["band"],

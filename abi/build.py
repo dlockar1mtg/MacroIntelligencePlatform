@@ -31,6 +31,14 @@ class Inputs:
         self.ndx = read("ndx_members.csv")
         self.frames = read("sec_share_frames.csv")
         self.daily = M.load_daily(s / "prices_daily.csv.gz") if (s / "prices_daily.csv.gz").exists() else None
+        self.dropped_partial_day = None
+        taken = self.manifest.get("taken_at_utc")
+        if self.daily is not None and taken:
+            ny = pd.Timestamp(taken).tz_convert("America/New_York")
+            if ny.hour * 60 + ny.minute < 16 * 60 + 15:      # fetched before the close: today's bar is a live quote
+                day = pd.Timestamp(ny.date())
+                self.dropped_partial_day = str(day.date()) if (self.daily["date"] == day).any() else None
+                self.daily = self.daily[self.daily["date"] != day]
         self.monthly = read("prices_monthly.csv.gz")
         self.splits = json.loads((s / "splits.json").read_text()) if (s / "splits.json").exists() else {}
         self.tickers_by_cik = {int(k): v for k, v in json.loads((s / "sec_tickers.json").read_text()).items()} if (s / "sec_tickers.json").exists() else None
@@ -89,6 +97,9 @@ def current(inp: Inputs, today: pd.Timestamp | None = None) -> dict:
         why = {"status": "INSUFFICIENT_DATA", "value": None, "why": (inp.manifest.get("errors") or {}).get("sec_facts", "no SEC facts")}
         fac.update(capex_vs_revenue_growth=why, capex_intensity=why, semis_inventory_build=why)
     fac["mag7_concentration"] = A.factor_concentration_official(inp.spy, (inp.manifest.get("files", {}).get("spy_holdings.csv") or {}).get("as_of"))
+    held = pd.to_datetime(str(fac["mag7_concentration"].get("holdings_as_of") or "").replace("As of ", ""), format="%d-%b-%Y", errors="coerce")
+    if fac["mag7_concentration"].get("status") == "OK" and (pd.isna(held) or (today - held).days > cfg["freshness"]["market_max_age_days"]):
+        fac["mag7_concentration"] = {**fac["mag7_concentration"], "status": "STALE", "why": "SPY holdings date missing or older than the market freshness limit"}
     month_ends = pd.date_range("2005-01-31", today, freq="ME")
     pe_now = today
     hists = inp.pe_histories(month_ends.append(pd.DatetimeIndex([pe_now]))) if inp.fund is not None else {}
@@ -98,7 +109,9 @@ def current(inp: Inputs, today: pd.Timestamp | None = None) -> dict:
     if b is not None and len(b):
         last = b.index.max()
         age = (today - pd.Timestamp(last)).days
-        fac["nasdaq100_breadth"] = {"status": "STALE" if age > cfg["freshness"]["market_max_age_days"] else "OK", "value": float(b.loc[last, "pct_above"]),
+        counted = int(b.loc[last, "members_counted"])
+        status = "INSUFFICIENT_DATA" if counted < M.BREADTH_MIN_MEMBERS else ("STALE" if age > cfg["freshness"]["market_max_age_days"] else "OK")
+        fac["nasdaq100_breadth"] = {"status": status, "value": float(b.loc[last, "pct_above"]),
                                     "date": str(pd.Timestamp(last).date()), "above": int(b.loc[last, "above"]), "members_counted": int(b.loc[last, "members_counted"]),
                                     "members_listed": int(b.loc[last, "members_listed"]), "survivorship": "today's Nasdaq-100 members"}
     else:
@@ -286,6 +299,7 @@ def section(inp: Inputs, today=None, with_history=True) -> dict:
            "inputs": {k: v for k, v in (inp.manifest.get("files") or {}).items()}, "input_errors": {k: v for k, v in (inp.manifest.get("errors") or {}).items()
                                                                                                     if not k.startswith(("daily:", "monthly:"))},
            "taken_at_utc": inp.manifest.get("taken_at_utc"), "automatic_execution_authorized": False,
+           "partial_day_dropped": inp.dropped_partial_day,
            "estimates_archive_since": None if inp.archive is None or inp.archive.empty else str(inp.archive["collected_on"].min())}
     if with_history:
         h = history(inp, end=pd.Timestamp(cur["as_of_date"]))

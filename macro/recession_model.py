@@ -41,6 +41,8 @@ def features(data: pd.DataFrame) -> pd.DataFrame:
 
 def target(data: pd.DataFrame) -> pd.DataFrame:
     """y(t)=1 if a recession starts in t+1..t+12; months in recession are excluded (in_recession=True)."""
+    published = data["USREC"].dropna()
+    last_known = published.index.max() if len(published) else None
     rec = data["USREC"].fillna(0)
     start = (rec == 1) & (rec.shift(1).fillna(0) == 0)
     starts = set(rec.index[start])
@@ -48,7 +50,7 @@ def target(data: pd.DataFrame) -> pd.DataFrame:
     y = []
     for i, m in enumerate(idx):
         window = idx[i + 1:i + 1 + HORIZON]
-        known = len(window) == HORIZON
+        known = len(window) == HORIZON and last_known is not None and window[-1] <= last_known
         y.append(float(any(w in starts for w in window)) if known else math.nan)
     return pd.DataFrame({"y": y, "in_recession": rec.values == 1, "start": start.values}, index=rec.index)
 

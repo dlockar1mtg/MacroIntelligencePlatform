@@ -43,6 +43,14 @@ def validate_contract(c: dict) -> None:
         raise ContractError("automatic execution must be false")
     if c.get("recession_probability", {}).get("status") == "PUBLISHED" and not c["recession_probability"].get("calibration"):
         raise ContractError("a recession probability needs its calibration evidence")
+    rp = c.get("recession_probability") or {}
+    if rp.get("status") == "PUBLISHED":
+        p = rp.get("probability_12m")
+        if not isinstance(p, (int, float)) or not 0 <= p <= 1 or not (rp.get("calibration") or {}).get(rp.get("chosen_model") or ""):
+            raise ContractError("a published recession probability needs a 0-1 value and calibration for its chosen model")
+    dq = c.get("data_quality")
+    if dq is not None and dq.get("status") not in ("OK", "DEGRADED"):
+        raise ContractError("data_quality status must be OK or DEGRADED")
     cur = c.get("current") or {}
     if cur.get("rsi") is not None:
         if not -1 <= float(cur["rsi"]) <= 1 or cur.get("band") not in BANDS:

@@ -57,9 +57,19 @@ def save_snapshot(directory: Path) -> dict:
         except Exception as exc:  # noqa: BLE001 - one missing series is reported, never fatal here
             manifest["series"][sid] = {"error": str(exc)[:200]}
             continue
-        s.to_frame(sid).to_csv(directory / f"{sid}.csv", index_label="DATE")
+        path = directory / f"{sid}.csv"
+        kept = 0
+        if path.exists():
+            # Merge rather than overwrite: some FRED series (the ICE BofA high-yield spread) only serve a rolling
+            # window, so observations that dropped off the start are kept from earlier snapshots. New values win.
+            old = pd.read_csv(path, index_col=0, parse_dates=True).iloc[:, 0]
+            old = pd.to_numeric(old, errors="coerce").dropna()
+            older = old[old.index < s.index.min()]
+            kept = len(older)
+            s = pd.concat([older, s]).sort_index()
+        s.to_frame(sid).to_csv(path, index_label="DATE")
         manifest["series"][sid] = {"rows": len(s), "first": str(s.index.min().date()), "last": str(s.index.max().date()),
-                                   "source": f"https://fred.stlouisfed.org/series/{sid}"}
+                                   "kept_from_earlier_snapshots": kept, "source": f"https://fred.stlouisfed.org/series/{sid}"}
     try:
         s = fetch_sp500()
         s.to_frame("GSPC").to_csv(directory / "GSPC.csv", index_label="DATE")
