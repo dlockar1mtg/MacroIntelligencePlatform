@@ -1,0 +1,70 @@
+name: Macro production
+# Weekdays after the 8:30 ET releases: fetch FRED and the S&P 500, compute RSI v2.0, replay history,
+# evaluate, build and validate the UIP package, publish it as macro-production-<run>, keep the history in state/.
+on:
+  schedule:
+    - cron: "40 13 * * 1-5"
+  workflow_dispatch:
+  pull_request:
+    paths: ["config/**", "macro/**", "publication/**", "run.py", ".github/workflows/macro-production.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: macro-production
+  cancel-in-progress: false
+jobs:
+  produce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements-dev.txt && python -m pytest -q
+      - name: Fetch, compute, evaluate and package
+        run: python run.py --fetch --snapshot data/snapshot --package uip-package --notice | tee run.log
+      - name: Report the components (one step each, GitHub keeps ten notices per step)
+        run: |
+          python - <<'PY'
+          import json
+          c = json.load(open("outputs/rsi_current.json"))
+          for x in c["components"]:
+              print(f"::notice title={x['system']} / {x['component']}::{x['value']} {x['unit']} -> {x['score']} (adds {x['contribution']}; {x['series']} {x['observation_month']} {x['status']})")
+          PY
+      - name: Report the history and the legacy readings
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open("outputs/rsi_evaluation.json")); e = d["evaluation"]
+          print(f"::notice title=Bands::{json.dumps(e['share_of_months_by_band'])} | mean in recessions {e['mean_rsi_in_recession_months']}, outside {e['mean_rsi_outside_recessions']}")
+          print(f"::notice title=Episodes at 0.2+::{json.dumps(e['episodes_at_or_above_0_2'])[:900]}")
+          print("::notice title=Legacy vs v2.0::" + "; ".join(f"{x['as_of']} {x['rsi_reported']} vs {x['v2_recomputed_for_that_month']}" for x in d["legacy"]))
+          c = json.load(open("outputs/rsi_current.json"))
+          print(f"::notice title=Overlay::{json.dumps(c['overlays'])}")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          name: macro-production-${{ github.run_id }}
+          path: uip-package/
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macro-run-outputs-${{ github.run_id }}
+          path: |
+            outputs/
+            data/snapshot/MANIFEST.json
+            run.log
+          retention-days: 14
+      - name: Keep the history and the data snapshot
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p state && cp outputs/rsi_history.csv outputs/rsi_current.json outputs/rsi_evaluation.json state/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state data/snapshot
+          git diff --cached --quiet || git commit -m "Macro production $(date -u +%F)"
+          git pull --rebase origin main && git push
