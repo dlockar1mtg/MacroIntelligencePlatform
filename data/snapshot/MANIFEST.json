@@ -1,5 +1,5 @@
 {
- "taken_at_utc": "2026-10-09T14:02:58+00:00",
+ "taken_at_utc": "2026-10-09T14:23:59+00:00",
  "series": {
   "PAYEMS": {
    "rows": 813,
@@ -84,6 +84,24 @@
    "first": "1971-04-02",
    "last": "2026-10-08",
    "source": "https://fred.stlouisfed.org/series/MORTGAGE30US"
+  },
+  "GS10": {
+   "rows": 813,
+   "first": "1959-01-01",
+   "last": "2026-09-01",
+   "source": "https://fred.stlouisfed.org/series/GS10"
+  },
+  "TB3MS": {
+   "rows": 813,
+   "first": "1959-01-01",
+   "last": "2026-09-01",
+   "source": "https://fred.stlouisfed.org/series/TB3MS"
+  },
+  "BAA": {
+   "rows": 813,
+   "first": "1959-01-01",
+   "last": "2026-09-01",
+   "source": "https://fred.stlouisfed.org/series/BAA"
   },
   "^GSPC": {
    "rows": 503,

@@ -44,6 +44,23 @@ jobs:
           c = json.load(open("outputs/rsi_current.json"))
           print(f"::notice title=Overlay::{json.dumps(c['overlays'])}")
           PY
+      - name: Report the recession model
+        run: |
+          python - <<'PY'
+          import json, os
+          if not os.path.exists("outputs/recession_probability.json"):
+              print("::warning title=Recession model::not run (long-history series missing)"); raise SystemExit(0)
+          d = json.load(open("outputs/recession_probability.json"))
+          print(f"::notice title=Recession model::{d['status']} {d.get('chosen_model')} p12={d.get('probability_12m')} as of {d.get('as_of_month')} | {d['why']}")
+          for name, s in d["calibration"].items():
+              print(f"::notice title={name}::months {s['months']} ({s['first']}..{s['last']}), events {s['events_in_sample']}, Brier {s['brier']} vs base {s['brier_base_rate']}, skill {s['brier_skill']}, AUC {s['auc']}, log loss {s['log_loss']}, false-alarm months {s['false_alarm_months_at_or_above_30']}")
+          for name in ("YIELD_CURVE", "MULTI_FACTOR"):
+              s = d["calibration"].get(name)
+              if s:
+                  print(f"::notice title={name} events::" + "; ".join(f"{e['recession_start']} max {e['max_in_12_before']} lead {e['lead_months']}" for e in s["recessions"]))
+                  print(f"::notice title={name} reliability::" + "; ".join(f"{r['band']} n={r['months']} pred {r['mean_predicted']} obs {r['observed']}" for r in s["reliability"]))
+          print(f"::notice title=Inputs now::{json.dumps(d.get('inputs'))}")
+          PY
       - uses: actions/upload-artifact@v4
         if: github.event_name != 'pull_request'
         with:
@@ -59,6 +76,14 @@ jobs:
             data/snapshot/MANIFEST.json
             run.log
           retention-days: 14
+      - name: Keep the data snapshot on the pull-request branch (so the change can be developed on the same inputs)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin "${GITHUB_HEAD_REF}" && git checkout -q -B pr-snapshot "origin/${GITHUB_HEAD_REF}"
+          git add data/snapshot
+          git diff --cached --quiet || { git commit -q -m "Data snapshot $(date -u +%F) for this pull request"; git push -q origin "HEAD:${GITHUB_HEAD_REF}"; }
       - name: Keep the history and the data snapshot
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |

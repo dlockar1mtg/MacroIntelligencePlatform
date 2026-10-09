@@ -14,6 +14,7 @@ import pandas as pd
 
 from macro import data as D
 from macro import evaluate as E
+from macro import recession_model as M
 from macro import rsi as R
 from publication.contract import build_contract, validate_package, write_package
 
@@ -47,6 +48,8 @@ def main(argv=None) -> int:
     hist = R.history(data, a.since, str(now), cfg)
     evaluation = E.evaluate(hist, data, a.since)
     legacy = E.legacy_comparison(hist)
+    full = R.history(data, "1975-01", str(now), cfg)          # the RSI replay as M3's input (1990+ has full coverage)
+    probability = M.build(data, full) if {"GS10", "TB3MS", "BAA"} <= set(data.columns) else None
     a.outputs.mkdir(parents=True, exist_ok=True)
     hist.to_csv(a.outputs / "rsi_history.csv", index=False)
     (a.outputs / "rsi_current.json").write_text(json.dumps(current, indent=1) + "\n", encoding="utf-8")
@@ -57,12 +60,16 @@ def main(argv=None) -> int:
     freshness = D.latest_observations(a.snapshot)
     contract = build_contract(current=current, history=history, evaluation=evaluation, legacy=legacy, freshness=freshness,
                               cfg=cfg, source_commit=commit(), run_id=os.environ.get("GITHUB_RUN_ID"))
+    if probability is not None:
+        contract["recession_probability"] = probability
+        (a.outputs / "recession_probability.json").write_text(json.dumps(probability, indent=1) + "\n", encoding="utf-8")
     manifest = write_package(a.package, contract)
     validate_package(a.package)
     summary = {"package_id": manifest["package_id"], "as_of": current["as_of_month"], "rsi": current["rsi"], "band": current["band"],
                "coverage": current["coverage"], "systems": {k: v["score"] for k, v in current["systems"].items()},
                "recessions": [(e["recession_start"], e["lead_months"], e["max_in_24_before"]) for e in evaluation["recessions"]],
-               "false_alarms": len(evaluation["false_alarms"])}
+               "false_alarms": len(evaluation["false_alarms"]),
+               "recession_probability": None if probability is None else {k: probability.get(k) for k in ("status", "chosen_model", "probability_12m", "as_of_month")}}
     print(json.dumps(summary))
     if a.notice:
         print(f"::notice title=RSI v2.0::{current['as_of_month']} RSI {current['rsi']} {current['band']} coverage {current['coverage']} | "
