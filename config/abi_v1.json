@@ -19,25 +19,25 @@
       "computation": "for each company: YoY growth of standalone quarterly CapEx and of quarterly revenue (latest filed fiscal quarter vs the same fiscal quarter a year earlier); ratio = mean CapEx growth / mean revenue growth (equal-weight arithmetic means)",
       "undefined": "mean revenue growth <= 0 -> UNDEFINED",
       "direction": "higher_is_riskier",
-      "bands": [[null, 1.5, 0], [1.5, 2.0, 25], [2.0, 3.0, 50], [3.0, 4.0, 75, "closed"], [4.0, null, 100]]
+      "bands": [[null, 1.5, 0], [1.5, 2.0, 25], [2.0, 3.0, 50], [3.0, 4.0, 75, "closed"], [4.0, null, 100, "open_low"]]
     },
     "capex_intensity": {
       "n": 2, "weight": 0.10, "companies": ["MSFT", "AMZN", "GOOGL", "META"], "unit": "percent",
       "computation": "mean of each company's latest standalone quarterly CapEx / quarterly revenue, in percent",
       "direction": "higher_is_riskier",
-      "bands": [[null, 10, 0], [10, 15, 25], [15, 20, 50], [20, 25, 75, "closed"], [25, null, 100]]
+      "bands": [[null, 10, 0], [10, 15, 25], [15, 20, 50], [20, 25, 75, "closed"], [25, null, 100, "open_low"]]
     },
     "semis_inventory_build": {
       "n": 3, "weight": 0.15, "companies": ["NVDA", "AMD", "AVGO", "MU"], "unit": "percentage points",
       "computation": "mean YoY growth of quarter-end inventory (vs the comparable prior-year quarter-end) minus mean YoY growth of quarterly revenue",
       "direction": "higher_is_riskier",
-      "bands": [[null, 0, 0], [0, 5, 25], [5, 10, 50], [10, 20, 75, "closed"], [20, null, 100]]
+      "bands": [[null, 0, 0], [0, 5, 25], [5, 10, 50], [10, 20, 75, "closed"], [20, null, 100, "open_low"]]
     },
     "mag7_concentration": {
       "n": 4, "weight": 0.20, "companies": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA"], "unit": "percent of S&P 500",
       "computation": "current: the seven companies' combined weight in the S&P 500 from the SPDR S&P 500 ETF (SPY) daily holdings, both Alphabet share classes summed (official, float-adjusted). History (backtest only): combined market capitalization / summed market capitalization of the current S&P 500 members, from SEC shares outstanding and month-end prices (survivorship-biased reconstruction, labelled)",
       "direction": "higher_is_riskier",
-      "bands": [[null, 20, 0], [20, 25, 25], [25, 30, 50], [30, 35, 75, "closed"], [35, null, 100]]
+      "bands": [[null, 20, 0], [20, 25, 25], [25, 30, 50], [30, 35, 75, "closed"], [35, null, 100, "open_low"]]
     },
     "forward_pe_premium": {
       "n": 5, "weight": 0.15, "companies": ["NVDA", "MSFT", "AVGO"], "unit": "percent",
@@ -48,7 +48,7 @@
       },
       "undefined": "zero or negative EPS for a company -> that company is UNDEFINED; fewer than 2 defined companies -> factor UNDEFINED",
       "direction": "higher_is_riskier",
-      "bands": [[null, 0, 0], [0, 20, 25], [20, 40, 50], [40, 60, 75, "closed"], [60, null, 100]]
+      "bands": [[null, 0, 0], [0, 20, 25], [20, 40, 50], [40, 60, 75, "closed"], [60, null, 100, "open_low"]]
     },
     "nasdaq100_breadth": {
       "n": 6, "weight": 0.10, "unit": "percent of members",

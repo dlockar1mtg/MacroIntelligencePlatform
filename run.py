@@ -12,6 +12,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from abi import build as ABI
+from abi import engine as ABI_ENGINE
 from macro import data as D
 from macro import evaluate as E
 from macro import recession_model as M
@@ -38,6 +40,8 @@ def main(argv=None) -> int:
     p.add_argument("--outputs", type=Path, default=ROOT / "outputs")
     p.add_argument("--since", default="1990-01")
     p.add_argument("--notice", action="store_true")
+    p.add_argument("--abi", type=Path, default=ROOT / "data" / "abi", help="AI bubble index inputs (from python -m abi.collect)")
+    p.add_argument("--abi-archive", type=Path, default=ROOT / "state" / "abi_estimates.csv")
     a = p.parse_args(argv)
     if a.fetch:
         print(json.dumps(D.save_snapshot(a.snapshot)["series"], indent=1))
@@ -63,6 +67,12 @@ def main(argv=None) -> int:
     if probability is not None:
         contract["recession_probability"] = probability
         (a.outputs / "recession_probability.json").write_text(json.dumps(probability, indent=1) + "\n", encoding="utf-8")
+    if (a.abi / "MANIFEST.json").exists():
+        try:
+            contract["ai_bubble"] = ABI.section(ABI.Inputs(a.abi, a.abi_archive, ABI_ENGINE.load_config()))
+        except Exception as exc:  # noqa: BLE001 - the bubble index never blocks the RSI package
+            contract["ai_bubble"] = {"status": "FAILED", "why": f"{type(exc).__name__}: {str(exc)[:300]}", "automatic_execution_authorized": False}
+        (a.outputs / "abi.json").write_text(json.dumps(contract["ai_bubble"], indent=1) + "\n", encoding="utf-8")
     manifest = write_package(a.package, contract)
     validate_package(a.package)
     summary = {"package_id": manifest["package_id"], "as_of": current["as_of_month"], "rsi": current["rsi"], "band": current["band"],
@@ -70,6 +80,8 @@ def main(argv=None) -> int:
                "recessions": [(e["recession_start"], e["lead_months"], e["max_in_24_before"]) for e in evaluation["recessions"]],
                "false_alarms": len(evaluation["false_alarms"]),
                "recession_probability": None if probability is None else {k: probability.get(k) for k in ("status", "chosen_model", "probability_12m", "as_of_month")}}
+    ab = contract.get("ai_bubble") or {}
+    summary["ai_bubble"] = (ab.get("current") or {}).get("research") or ab.get("status")
     print(json.dumps(summary))
     if a.notice:
         print(f"::notice title=RSI v2.0::{current['as_of_month']} RSI {current['rsi']} {current['band']} coverage {current['coverage']} | "
