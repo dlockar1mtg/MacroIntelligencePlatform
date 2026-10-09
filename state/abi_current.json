@@ -1,0 +1,613 @@
+{
+ "model_id": "MIHTS_ABI",
+ "model_version": "1.0.0",
+ "research_version": "1.0.0-R",
+ "current": {
+  "as_of_date": "2026-10-09",
+  "research": {
+   "version": "1.0.0-R",
+   "abi": 50.0,
+   "label": "ELEVATED",
+   "label_text": "Elevated",
+   "status": "RESEARCH_UNVERIFIED",
+   "missing": [],
+   "stale": [],
+   "contributions": {
+    "capex_vs_revenue_growth": 20.0,
+    "capex_intensity": 10.0,
+    "semis_inventory_build": 0.0,
+    "mag7_concentration": 15.0,
+    "forward_pe_premium": 0.0,
+    "nasdaq100_breadth": 5.0,
+    "eps_revisions": 0.0
+   }
+  },
+  "strict": {
+   "version": "1.0.0",
+   "abi": null,
+   "status": "BLOCKED",
+   "why": "factors 5 and 7 need a licensed point-in-time analyst-consensus archive",
+   "partial_points": 50.0,
+   "partial_weight": 0.75
+  },
+  "factors": [
+   {
+    "factor": "capex_vs_revenue_growth",
+    "n": 1,
+    "name": "Big Tech CapEx growth vs revenue growth",
+    "weight": 0.2,
+    "unit": "ratio",
+    "value": 4.0231,
+    "score": 100,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": 4.023072,
+     "mean_capex_growth": 0.900767,
+     "mean_revenue_growth": 0.2239,
+     "companies": [
+      {
+       "ticker": "MSFT",
+       "quarter_end": "2026-06-30",
+       "revenue": 90007000000.0,
+       "capex": 35802000000.0,
+       "revenue_growth": 0.17747,
+       "capex_growth": 1.096259,
+       "intensity_pct": 39.776906,
+       "filed": "2026-07-29",
+       "accn": [
+        "0001193125-26-323660",
+        "0001193125-26-323660"
+       ],
+       "how": [
+        "year-to-date 364.0 days minus the previous",
+        "year-to-date 364.0 days minus the previous"
+       ],
+       "age_days": 101
+      },
+      {
+       "ticker": "AMZN",
+       "quarter_end": "2026-06-30",
+       "revenue": 200606000000.0,
+       "capex": 54208000000.0,
+       "revenue_growth": 0.196205,
+       "capex_growth": 0.684368,
+       "intensity_pct": 27.022123,
+       "filed": "2026-07-31",
+       "accn": [
+        "0001018724-26-000026",
+        "0001018724-26-000026"
+       ],
+       "how": [
+        "reported",
+        "reported"
+       ],
+       "age_days": 101
+      },
+      {
+       "ticker": "GOOGL",
+       "quarter_end": "2026-06-30",
+       "revenue": 119796000000.0,
+       "capex": 44924000000.0,
+       "revenue_growth": 0.242336,
+       "capex_growth": 1.001426,
+       "intensity_pct": 37.500417,
+       "filed": "2026-07-23",
+       "accn": [
+        "0001652044-26-000071",
+        "0001652044-26-000071"
+       ],
+       "how": [
+        "reported",
+        "year-to-date 180.0 days minus the previous"
+       ],
+       "age_days": 101
+      },
+      {
+       "ticker": "META",
+       "quarter_end": "2026-06-30",
+       "revenue": 60801000000.0,
+       "capex": 30116000000.0,
+       "revenue_growth": 0.27959,
+       "capex_growth": 0.821018,
+       "intensity_pct": 49.53208,
+       "filed": "2026-07-30",
+       "accn": [
+        "0001628280-26-050705",
+        "0001628280-26-050705"
+       ],
+       "how": [
+        "reported",
+        "year-to-date 180.0 days minus the previous"
+       ],
+       "age_days": 101
+      }
+     ]
+    }
+   },
+   {
+    "factor": "capex_intensity",
+    "n": 2,
+    "name": "Big Tech CapEx intensity",
+    "weight": 0.1,
+    "unit": "percent",
+    "value": 38.4579,
+    "score": 100,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": 38.457882,
+     "companies": [
+      {
+       "ticker": "MSFT",
+       "quarter_end": "2026-06-30",
+       "revenue": 90007000000.0,
+       "capex": 35802000000.0,
+       "revenue_growth": 0.17747,
+       "capex_growth": 1.096259,
+       "intensity_pct": 39.776906,
+       "filed": "2026-07-29",
+       "accn": [
+        "0001193125-26-323660",
+        "0001193125-26-323660"
+       ],
+       "how": [
+        "year-to-date 364.0 days minus the previous",
+        "year-to-date 364.0 days minus the previous"
+       ],
+       "age_days": 101
+      },
+      {
+       "ticker": "AMZN",
+       "quarter_end": "2026-06-30",
+       "revenue": 200606000000.0,
+       "capex": 54208000000.0,
+       "revenue_growth": 0.196205,
+       "capex_growth": 0.684368,
+       "intensity_pct": 27.022123,
+       "filed": "2026-07-31",
+       "accn": [
+        "0001018724-26-000026",
+        "0001018724-26-000026"
+       ],
+       "how": [
+        "reported",
+        "reported"
+       ],
+       "age_days": 101
+      },
+      {
+       "ticker": "GOOGL",
+       "quarter_end": "2026-06-30",
+       "revenue": 119796000000.0,
+       "capex": 44924000000.0,
+       "revenue_growth": 0.242336,
+       "capex_growth": 1.001426,
+       "intensity_pct": 37.500417,
+       "filed": "2026-07-23",
+       "accn": [
+        "0001652044-26-000071",
+        "0001652044-26-000071"
+       ],
+       "how": [
+        "reported",
+        "year-to-date 180.0 days minus the previous"
+       ],
+       "age_days": 101
+      },
+      {
+       "ticker": "META",
+       "quarter_end": "2026-06-30",
+       "revenue": 60801000000.0,
+       "capex": 30116000000.0,
+       "revenue_growth": 0.27959,
+       "capex_growth": 0.821018,
+       "intensity_pct": 49.53208,
+       "filed": "2026-07-30",
+       "accn": [
+        "0001628280-26-050705",
+        "0001628280-26-050705"
+       ],
+       "how": [
+        "reported",
+        "year-to-date 180.0 days minus the previous"
+       ],
+       "age_days": 101
+      }
+     ]
+    }
+   },
+   {
+    "factor": "semis_inventory_build",
+    "n": 3,
+    "name": "Semiconductor inventory build",
+    "weight": 0.15,
+    "unit": "percentage points",
+    "value": -87.813,
+    "score": 0,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": -87.81303,
+     "mean_inventory_growth": 0.673691,
+     "mean_revenue_growth": 1.551821,
+     "companies": [
+      {
+       "ticker": "NVDA",
+       "quarter_end": "2026-07-26",
+       "revenue": 96221000000.0,
+       "inventory": 31575000000.0,
+       "revenue_growth": 1.058511,
+       "inventory_growth": 1.110346,
+       "filed": "2026-08-26",
+       "accn": [
+        "0001045810-26-000075",
+        "0001045810-26-000075"
+       ],
+       "age_days": 75
+      },
+      {
+       "ticker": "AMD",
+       "quarter_end": "2026-06-27",
+       "revenue": 11536000000.0,
+       "inventory": 8468000000.0,
+       "revenue_growth": 0.501106,
+       "inventory_growth": 0.268234,
+       "filed": "2026-08-05",
+       "accn": [
+        "0000002488-26-000123",
+        "0000002488-26-000123"
+       ],
+       "age_days": 104
+      },
+      {
+       "ticker": "AVGO",
+       "quarter_end": "2026-08-02",
+       "revenue": 29591000000.0,
+       "inventory": 4523000000.0,
+       "revenue_growth": 0.855003,
+       "inventory_growth": 1.074771,
+       "filed": "2026-09-10",
+       "accn": [
+        "0001730168-26-000080",
+        "0001730168-26-000080"
+       ],
+       "age_days": 68
+      },
+      {
+       "ticker": "MU",
+       "quarter_end": "2026-09-03",
+       "revenue": 54229000000.0,
+       "inventory": 10372000000.0,
+       "revenue_growth": 3.792665,
+       "inventory_growth": 0.241412,
+       "filed": "2026-10-09",
+       "accn": [
+        "0000723125-26-000023",
+        "0000723125-26-000023"
+       ],
+       "age_days": 36
+      }
+     ]
+    }
+   },
+   {
+    "factor": "mag7_concentration",
+    "n": 4,
+    "name": "Magnificent Seven concentration",
+    "weight": 0.2,
+    "unit": "percent of S&P 500",
+    "value": 34.7494,
+    "score": 75,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": 34.749446,
+     "source": "SPY daily holdings (official S&P 500 weights)",
+     "holdings_as_of": "As of 08-Oct-2026",
+     "weights": {
+      "NVDA": 8.336249,
+      "AAPL": 7.425376,
+      "MSFT": 5.800066,
+      "AMZN": 3.727229,
+      "GOOGL": 3.054719,
+      "GOOG": 2.450071,
+      "META": 2.376019,
+      "TSLA": 1.579717
+     },
+     "members": 503
+    }
+   },
+   {
+    "factor": "forward_pe_premium",
+    "n": 5,
+    "name": "Valuation premium vs own 10-year history",
+    "weight": 0.15,
+    "unit": "percent",
+    "value": -25.5186,
+    "score": 0,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": -25.518628,
+     "companies": {
+      "NVDA": {
+       "status": "OK",
+       "pe": 28.986093,
+       "baseline_pe": 58.632647,
+       "baseline_months": 120,
+       "premium_pct": -50.563219
+      },
+      "MSFT": {
+       "status": "OK",
+       "pe": 29.792317,
+       "baseline_pe": 33.966861,
+       "baseline_months": 120,
+       "premium_pct": -12.290051
+      },
+      "AVGO": {
+       "status": "OK",
+       "pe": 46.114797,
+       "baseline_pe": 53.437073,
+       "baseline_months": 109,
+       "premium_pct": -13.702614
+      }
+     },
+     "companies_used": 3,
+     "substitute": "trailing_pe_premium (v1.0-R)"
+    }
+   },
+   {
+    "factor": "nasdaq100_breadth",
+    "n": 6,
+    "name": "Nasdaq-100 breadth",
+    "weight": 0.1,
+    "unit": "percent of members",
+    "value": 61.6162,
+    "score": 50,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": 61.616162,
+     "date": "2026-10-09",
+     "above": 61,
+     "members_counted": 99,
+     "members_listed": 101,
+     "survivorship": "today's Nasdaq-100 members"
+    }
+   },
+   {
+    "factor": "eps_revisions",
+    "n": 7,
+    "name": "Earnings estimate revisions",
+    "weight": 0.1,
+    "unit": "percent",
+    "value": 18.8444,
+    "score": 0,
+    "status": "OK",
+    "detail": {
+     "status": "OK",
+     "value": 18.844372,
+     "collected_on": "2026-10-09",
+     "companies": {
+      "MSFT": {
+       "ntm_now": 20.850242,
+       "ntm_90d_ago": 19.481838,
+       "revision_pct": 7.023998,
+       "fy0_end": "2027-06-30",
+       "same_fiscal_year_revision_pct": {
+        "0y": 1.975739,
+        "+1y": 4.873586
+       },
+       "analysts": 34
+      },
+      "NVDA": {
+       "ntm_now": 13.852549,
+       "ntm_90d_ago": 10.601597,
+       "revision_pct": 30.664746,
+       "fy0_end": "2027-01-31",
+       "same_fiscal_year_revision_pct": {
+        "0y": 4.195725,
+        "+1y": 25.210952
+       },
+       "analysts": 51
+      }
+     },
+     "source": "Yahoo Finance earningsTrend (research substitute)",
+     "substitute": "yahoo_estimate_trend_90d (v1.0-R)"
+    }
+   }
+  ]
+ },
+ "evaluation": {
+  "months_with_abi": 134,
+  "first": "2015-08",
+  "last": "2026-09",
+  "correlations": {
+   "qqq_3m": {
+    "spearman": 0.059,
+    "interval_90": [
+     -0.076,
+     0.164
+    ],
+    "months": 132
+   },
+   "qqq_6m": {
+    "spearman": 0.113,
+    "interval_90": [
+     -0.122,
+     0.248
+    ],
+    "months": 129
+   },
+   "qqq_12m": {
+    "spearman": 0.284,
+    "interval_90": [
+     -0.036,
+     0.53
+    ],
+    "months": 123
+   },
+   "qqq_maxdd_12m": {
+    "spearman": 0.327,
+    "interval_90": [
+     0.033,
+     0.57
+    ],
+    "months": 122
+   },
+   "soxx_12m": {
+    "spearman": 0.514,
+    "interval_90": [
+     0.19,
+     0.646
+    ],
+    "months": 123
+   }
+  },
+  "terciles": {
+   "low": {
+    "months": 47,
+    "abi_range": [
+     15.28,
+     27.78
+    ],
+    "qqq_12m": 15.81,
+    "qqq_maxdd_12m": -21.49,
+    "soxx_12m": 18.17
+   },
+   "middle": {
+    "months": 46,
+    "abi_range": [
+     29.17,
+     41.67
+    ],
+    "qqq_12m": 23.15,
+    "qqq_maxdd_12m": -15.08,
+    "soxx_12m": 35.18
+   },
+   "high": {
+    "months": 41,
+    "abi_range": [
+     43.06,
+     73.61
+    ],
+    "qqq_12m": 29.65,
+    "qqq_maxdd_12m": -14.08,
+    "soxx_12m": 64.9
+   }
+  },
+  "qqq_drawdowns_20pct": [
+   {
+    "peak": "2018-08-29",
+    "trough": "2018-12-24",
+    "depth_pct": -22.8,
+    "abi_h6_max_12m_before": 43.06,
+    "abi_h6_at_peak_month": 33.33
+   },
+   {
+    "peak": "2020-02-19",
+    "trough": "2020-03-16",
+    "depth_pct": -28.6,
+    "abi_h6_max_12m_before": 36.11,
+    "abi_h6_at_peak_month": 22.22
+   },
+   {
+    "peak": "2021-12-27",
+    "trough": "2022-11-03",
+    "depth_pct": -35.1,
+    "abi_h6_max_12m_before": 34.72,
+    "abi_h6_at_peak_month": 20.83
+   },
+   {
+    "peak": "2025-02-19",
+    "trough": "2025-04-08",
+    "depth_pct": -22.8,
+    "abi_h6_max_12m_before": 68.06,
+    "abi_h6_at_peak_month": 68.06
+   }
+  ],
+  "months_at_60_plus": 15,
+  "false_alarm_months_60_plus": 8,
+  "warning_value": {
+   "passed": false,
+   "rule": "the page may say the index 'has historically preceded weaker technology returns' only if the 12-month return correlation is at or below -0.20 with a bootstrap interval excluding zero, AND the high tercile's mean 12-month drawdown is deeper than the low tercile's. Otherwise it says the backtest found no reliable warning value. Either way it is never framed as a crash probability or timing signal",
+   "statement": "The backtest found no reliable warning value: read the index as a description of conditions, not a warning."
+  }
+ },
+ "concentration_reconstruction": {
+  "status": "OK",
+  "method": "today's official SPY weights carried back by each company's market-cap change",
+  "survivorship": "today's S&P 500 members throughout",
+  "companies": 503,
+  "price_change_only": [
+   "AJG",
+   "AMCR",
+   "APA",
+   "APO",
+   "ARES",
+   "AVGO",
+   "BALL",
+   "BE",
+   "BEN",
+   "BG",
+   "BKNG",
+   "BKR",
+   "BLK",
+   "BRK-B",
+   "CCL",
+   "CEG",
+   "CI",
+   "CLX",
+   "CMG",
+   "COHR",
+   "CRH",
+   "CRWD",
+   "CVNA",
+   "DASH",
+   "DD",
+   "DDOG",
+   "DIS",
+   "DVA",
+   "EBAY",
+   "ECHO",
+   "EOG",
+   "ERIE",
+   "ETN",
+   "EVRG",
+   "EXE",
+   "FANG",
+   "FDXF",
+   "FERG",
+   "FOX",
+   "FOXA",
+   "FTNT",
+   "GDDY",
+   "GOOG",
+   "GOOGL",
+   "GRMN",
+   "HBAN",
+   "HONA",
+   "HOOD",
+   "HPQ",
+   "IBKR",
+   "ICE",
+   "IFF",
+   "INVH",
+   "ISRG",
+   "KDP",
+   "KKR",
+   "KMI",
+   "LIN",
+   "LRCX",
+   "MA"
+  ],
+  "price_change_only_count": 107,
+  "check_against_official": {
+   "reconstructed_latest": 34.73749,
+   "reconstructed_month": "2026-09",
+   "official_today": 34.749446
+  }
+ },
+ "taken_at_utc": "2026-10-09T23:46:14+00:00"
+}

@@ -44,6 +44,11 @@
     "peak": 0.53
    },
    {
+    "from": "1991-12",
+    "to": "1991-12",
+    "peak": 0.203
+   },
+   {
     "from": "2001-01",
     "to": "2002-02",
     "peak": 0.442
@@ -76,6 +81,11 @@
   ],
   "false_alarms": [
    {
+    "from": "1991-12",
+    "to": "1991-12",
+    "peak": 0.203
+   },
+   {
     "from": "2002-06",
     "to": "2002-06",
     "peak": 0.21
@@ -93,13 +103,13 @@
   ],
   "share_of_months_by_band": {
    "EXPANSION": 0.776,
-   "LATE_CYCLE": 0.109,
+   "LATE_CYCLE": 0.106,
    "DETERIORATION": 0.063,
-   "RECESSIONARY_STRESS": 0.029,
+   "RECESSIONARY_STRESS": 0.032,
    "PANIC": 0.023
   },
-  "mean_rsi_in_recession_months": 0.459,
-  "mean_rsi_outside_recessions": -0.343,
+  "mean_rsi_in_recession_months": 0.462,
+  "mean_rsi_outside_recessions": -0.342,
   "note": "Revised-data replay with release lags; four recessions since 1990 is far too few to call any threshold calibrated."
  },
  "legacy": [
