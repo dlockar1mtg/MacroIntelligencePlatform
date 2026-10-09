@@ -14,7 +14,8 @@ from pathlib import Path
 import pandas as pd
 
 FRED_SERIES = ("PAYEMS", "IC4WSA", "CCSA", "UNRATE", "T10Y3M", "BAMLH0A0HYM2", "BAA10Y", "GACDFSA066MSFRBPHI",
-               "PERMIT", "M2SL", "UMCSENT", "DCOILWTICO", "USREC", "MORTGAGE30US")
+               "PERMIT", "M2SL", "UMCSENT", "DCOILWTICO", "USREC", "MORTGAGE30US",
+               "GS10", "TB3MS", "BAA")      # long monthly history for the recession model (docs/RECESSION_MODEL_PLAN.md)
 SP500 = "^GSPC"
 START = "1959-01-01"
 

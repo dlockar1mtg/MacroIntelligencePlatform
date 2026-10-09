@@ -59,6 +59,14 @@ jobs:
             data/snapshot/MANIFEST.json
             run.log
           retention-days: 14
+      - name: Keep the data snapshot on the pull-request branch (so the change can be developed on the same inputs)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin "${GITHUB_HEAD_REF}" && git checkout -q -B pr-snapshot "origin/${GITHUB_HEAD_REF}"
+          git add data/snapshot
+          git diff --cached --quiet || { git commit -q -m "Data snapshot $(date -u +%F) for this pull request"; git push -q origin "HEAD:${GITHUB_HEAD_REF}"; }
       - name: Keep the history and the data snapshot
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
