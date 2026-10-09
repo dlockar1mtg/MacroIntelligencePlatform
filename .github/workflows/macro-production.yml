@@ -25,6 +25,25 @@ jobs:
       - run: pip install -r requirements-dev.txt && python -m pytest -q
       - name: Fetch, compute, evaluate and package
         run: python run.py --fetch --snapshot data/snapshot --package uip-package --notice | tee run.log
+      - name: Report the components (one step each, GitHub keeps ten notices per step)
+        run: |
+          python - <<'PY'
+          import json
+          c = json.load(open("outputs/rsi_current.json"))
+          for x in c["components"]:
+              print(f"::notice title={x['system']} / {x['component']}::{x['value']} {x['unit']} -> {x['score']} (adds {x['contribution']}; {x['series']} {x['observation_month']} {x['status']})")
+          PY
+      - name: Report the history and the legacy readings
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open("outputs/rsi_evaluation.json")); e = d["evaluation"]
+          print(f"::notice title=Bands::{json.dumps(e['share_of_months_by_band'])} | mean in recessions {e['mean_rsi_in_recession_months']}, outside {e['mean_rsi_outside_recessions']}")
+          print(f"::notice title=Episodes at 0.2+::{json.dumps(e['episodes_at_or_above_0_2'])[:900]}")
+          print("::notice title=Legacy vs v2.0::" + "; ".join(f"{x['as_of']} {x['rsi_reported']} vs {x['v2_recomputed_for_that_month']}" for x in d["legacy"]))
+          c = json.load(open("outputs/rsi_current.json"))
+          print(f"::notice title=Overlay::{json.dumps(c['overlays'])}")
+          PY
       - uses: actions/upload-artifact@v4
         if: github.event_name != 'pull_request'
         with:
