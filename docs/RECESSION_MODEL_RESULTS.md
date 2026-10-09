@@ -79,3 +79,4 @@ recession came from the pandemic.
 - **More inputs:** add the near-term forward spread and the excess bond premium, both known to add to the
   curve.
 - **Real-time data:** use ALFRED real-time vintages, so the replay sees only what was known each month.
+- **Correction to the plan text:** it says "seven recessions since 1975". There are six recession starts after January 1975 (the 1973–75 recession began earlier). The limitation shown with the number now says six. Nothing else in the plan changed.

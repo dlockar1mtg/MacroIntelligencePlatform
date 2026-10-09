@@ -200,7 +200,7 @@ def build(data: pd.DataFrame, rsi_history: pd.DataFrame | None = None) -> dict:
     doc = {"model_id": MODEL_ID, "model_version": MODEL_VERSION, "question": "Will an NBER recession begin within the next 12 months?",
            "plan": "docs/RECESSION_MODEL_PLAN.md", "status": "PUBLISHED" if pick else "NOT_PUBLISHED", "chosen_model": pick, "why": why,
            "calibration": scores, "limitations": ["today's revised data and NBER chronology, not real-time vintages",
-                                                   "seven recessions since 1975; overlapping monthly predictions are not independent",
+                                                   "six recession starts since 1975; overlapping monthly predictions are not independent",
                                                    "no equities (the free S&P 500 history starts in 1985)"]}
     if pick:
         doc.update(current(data, pick))
