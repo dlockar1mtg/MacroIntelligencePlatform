@@ -1,5 +1,5 @@
 {
- "taken_at_utc": "2026-10-09T23:49:51+00:00",
+ "taken_at_utc": "2026-10-12T21:54:49+00:00",
  "series": {
   "PAYEMS": {
    "rows": 813,
@@ -123,7 +123,7 @@
   "^GSPC": {
    "rows": 503,
    "first": "1985-01-01",
-   "last": "2026-10-09",
+   "last": "2026-10-12",
    "source": "Yahoo Finance chart API, ^GSPC monthly close"
   }
  }
