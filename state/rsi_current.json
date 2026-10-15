@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-10",
  "model_version": "2.0.0",
- "rsi": -0.5495,
- "rsi_unsuppressed": -0.5495,
+ "rsi": -0.548,
+ "rsi_unsuppressed": -0.548,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -14,7 +14,7 @@
   },
   "financial": {
    "weight": 0.25,
-   "score": -0.4383,
+   "score": -0.432,
    "coverage": 1.0
   },
   "real_economy": {
@@ -63,7 +63,7 @@
    "unit": "initial claims (4-week avg) per 1,000 payroll jobs",
    "within_weight": 0.35,
    "system_weight": 0.3,
-   "value": 1.2449,
+   "value": 1.2473,
    "score": -1.0,
    "observation_month": "2026-10",
    "status": "OK",
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 1.0375,
+   "value": 1.0233,
    "score": 0.0,
    "observation_month": "2026-10",
    "status": "FLOORED_AFTER_INVERSION",
@@ -114,11 +114,11 @@
    "unit": "high-yield option-adjusted spread, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 3.1233,
-   "score": -0.8767,
+   "value": 3.136,
+   "score": -0.864,
    "observation_month": "2026-10",
    "status": "OK",
-   "contribution": -0.1096,
+   "contribution": -0.108,
    "anchors": {
     "expansion": 3.0,
     "stress": 5.0
@@ -131,9 +131,9 @@
    "unit": "Philly Fed diffusion index (3-month average)",
    "within_weight": 0.6,
    "system_weight": 0.2,
-   "value": 42.2,
+   "value": 35.3667,
    "score": -1.0,
-   "observation_month": "2026-09",
+   "observation_month": "2026-10",
    "status": "OK",
    "contribution": -0.12,
    "anchors": {
@@ -182,7 +182,7 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": 5.2915,
+   "value": 5.7391,
    "score": -1.0,
    "observation_month": "2026-10",
    "status": "OK",
