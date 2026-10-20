@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-10",
  "model_version": "2.0.0",
- "rsi": -0.5452,
- "rsi_unsuppressed": -0.5452,
+ "rsi": -0.5389,
+ "rsi_unsuppressed": -0.5389,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -14,12 +14,12 @@
   },
   "financial": {
    "weight": 0.25,
-   "score": -0.4208,
+   "score": -0.4158,
    "coverage": 1.0
   },
   "real_economy": {
    "weight": 0.2,
-   "score": -0.8157,
+   "score": -0.7906,
    "coverage": 1.0
   },
   "liquidity": {
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 0.9873,
+   "value": 0.9783,
    "score": 0.0,
    "observation_month": "2026-10",
    "status": "FLOORED_AFTER_INVERSION",
@@ -114,11 +114,11 @@
    "unit": "high-yield option-adjusted spread, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 3.1583,
-   "score": -0.8417,
+   "value": 3.1685,
+   "score": -0.8315,
    "observation_month": "2026-10",
    "status": "OK",
-   "contribution": -0.1052,
+   "contribution": -0.1039,
    "anchors": {
     "expansion": 3.0,
     "stress": 5.0
@@ -148,11 +148,11 @@
    "unit": "building permits, 3-month average, % change on a year earlier",
    "within_weight": 0.4,
    "system_weight": 0.2,
-   "value": 1.5437,
-   "score": -0.5392,
-   "observation_month": "2026-08",
+   "value": 1.0737,
+   "score": -0.4765,
+   "observation_month": "2026-09",
    "status": "OK",
-   "contribution": -0.0431,
+   "contribution": -0.0381,
    "anchors": {
     "expansion": 5.0,
     "stress": -10.0
@@ -182,7 +182,7 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": 5.3393,
+   "value": 5.513,
    "score": -1.0,
    "observation_month": "2026-10",
    "status": "OK",

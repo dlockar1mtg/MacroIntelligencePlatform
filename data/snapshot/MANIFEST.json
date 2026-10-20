@@ -1,5 +1,5 @@
 {
- "taken_at_utc": "2026-10-19T19:31:08+00:00",
+ "taken_at_utc": "2026-10-20T18:09:29+00:00",
  "series": {
   "PAYEMS": {
    "rows": 813,
@@ -30,23 +30,23 @@
    "source": "https://fred.stlouisfed.org/series/UNRATE"
   },
   "T10Y3M": {
-   "rows": 11200,
+   "rows": 11201,
    "first": "1982-01-04",
-   "last": "2026-10-16",
+   "last": "2026-10-19",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/T10Y3M"
   },
   "BAMLH0A0HYM2": {
-   "rows": 792,
+   "rows": 793,
    "first": "2023-10-10",
-   "last": "2026-10-16",
-   "kept_from_earlier_snapshots": 8,
+   "last": "2026-10-19",
+   "kept_from_earlier_snapshots": 9,
    "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
   },
   "BAA10Y": {
-   "rows": 10197,
+   "rows": 10198,
    "first": "1986-01-02",
-   "last": "2026-10-15",
+   "last": "2026-10-16",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/BAA10Y"
   },
@@ -58,9 +58,9 @@
    "source": "https://fred.stlouisfed.org/series/GACDFSA066MSFRBPHI"
   },
   "PERMIT": {
-   "rows": 800,
+   "rows": 801,
    "first": "1960-01-01",
-   "last": "2026-08-01",
+   "last": "2026-09-01",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/PERMIT"
   },
@@ -123,7 +123,7 @@
   "^GSPC": {
    "rows": 503,
    "first": "1985-01-01",
-   "last": "2026-10-19",
+   "last": "2026-10-20",
    "source": "Yahoo Finance chart API, ^GSPC monthly close"
   }
  }

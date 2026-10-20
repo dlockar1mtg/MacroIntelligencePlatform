@@ -3,7 +3,7 @@
  "model_version": "1.0.0",
  "research_version": "1.0.0-R",
  "current": {
-  "as_of_date": "2026-10-19",
+  "as_of_date": "2026-10-20",
   "research": {
    "version": "1.0.0-R",
    "abi": 52.5,
@@ -63,7 +63,7 @@
         "year-to-date 364.0 days minus the previous",
         "year-to-date 364.0 days minus the previous"
        ],
-       "age_days": 111
+       "age_days": 112
       },
       {
        "ticker": "AMZN",
@@ -82,7 +82,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 111
+       "age_days": 112
       },
       {
        "ticker": "GOOGL",
@@ -101,7 +101,7 @@
         "reported",
         "year-to-date 180.0 days minus the previous"
        ],
-       "age_days": 111
+       "age_days": 112
       },
       {
        "ticker": "META",
@@ -120,7 +120,7 @@
         "reported",
         "year-to-date 180.0 days minus the previous"
        ],
-       "age_days": 111
+       "age_days": 112
       }
      ]
     }
@@ -155,7 +155,7 @@
         "year-to-date 364.0 days minus the previous",
         "year-to-date 364.0 days minus the previous"
        ],
-       "age_days": 111
+       "age_days": 112
       },
       {
        "ticker": "AMZN",
@@ -174,7 +174,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 111
+       "age_days": 112
       },
       {
        "ticker": "GOOGL",
@@ -193,7 +193,7 @@
         "reported",
         "year-to-date 180.0 days minus the previous"
        ],
-       "age_days": 111
+       "age_days": 112
       },
       {
        "ticker": "META",
@@ -212,7 +212,7 @@
         "reported",
         "year-to-date 180.0 days minus the previous"
        ],
-       "age_days": 111
+       "age_days": 112
       }
      ]
     }
@@ -244,7 +244,7 @@
         "0001045810-26-000075",
         "0001045810-26-000075"
        ],
-       "age_days": 85
+       "age_days": 86
       },
       {
        "ticker": "AMD",
@@ -258,7 +258,7 @@
         "0000002488-26-000123",
         "0000002488-26-000123"
        ],
-       "age_days": 114
+       "age_days": 115
       },
       {
        "ticker": "AVGO",
@@ -272,7 +272,7 @@
         "0001730168-26-000080",
         "0001730168-26-000080"
        ],
-       "age_days": 78
+       "age_days": 79
       },
       {
        "ticker": "MU",
@@ -286,7 +286,7 @@
         "0000723125-26-000023",
         "0000723125-26-000023"
        ],
-       "age_days": 46
+       "age_days": 47
       }
      ]
     }
@@ -297,23 +297,23 @@
     "name": "Magnificent Seven concentration",
     "weight": 0.2,
     "unit": "percent of S&P 500",
-    "value": 34.4525,
+    "value": 34.7425,
     "score": 75,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": 34.45248,
+     "value": 34.742488,
      "source": "SPY daily holdings (official S&P 500 weights)",
-     "holdings_as_of": "As of 16-Oct-2026",
+     "holdings_as_of": "As of 19-Oct-2026",
      "weights": {
-      "NVDA": 7.850898,
-      "AAPL": 7.594225,
-      "MSFT": 5.951445,
-      "AMZN": 3.717575,
-      "GOOGL": 3.027833,
-      "GOOG": 2.426167,
-      "META": 2.369714,
-      "TSLA": 1.514623
+      "NVDA": 7.927084,
+      "AAPL": 7.551917,
+      "MSFT": 5.977343,
+      "AMZN": 3.886853,
+      "GOOGL": 3.047316,
+      "GOOG": 2.439617,
+      "META": 2.34716,
+      "TSLA": 1.565198
      },
      "members": 503
     }
@@ -324,33 +324,33 @@
     "name": "Valuation premium vs own 10-year history",
     "weight": 0.15,
     "unit": "percent",
-    "value": -29.5454,
+    "value": -28.6237,
     "score": 0,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": -29.545359,
+     "value": -28.623714,
      "companies": {
       "NVDA": {
        "status": "OK",
-       "pe": 27.070797,
+       "pe": 27.445006,
        "baseline_pe": 58.632647,
        "baseline_months": 120,
-       "premium_pct": -53.829823
+       "premium_pct": -53.191597
       },
       "MSFT": {
        "status": "OK",
-       "pe": 29.457126,
+       "pe": 29.706014,
        "baseline_pe": 33.966861,
        "baseline_months": 120,
-       "premium_pct": -13.276866
+       "premium_pct": -12.544128
       },
       "AVGO": {
        "status": "OK",
-       "pe": 41.932398,
+       "pe": 42.677295,
        "baseline_pe": 53.437073,
        "baseline_months": 109,
-       "premium_pct": -21.529388
+       "premium_pct": -20.135417
       }
      },
      "companies_used": 3,
@@ -363,14 +363,14 @@
     "name": "Nasdaq-100 breadth",
     "weight": 0.1,
     "unit": "percent of members",
-    "value": 55.5556,
+    "value": 57.5758,
     "score": 75,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": 55.555556,
-     "date": "2026-10-16",
-     "above": 55,
+     "value": 57.575758,
+     "date": "2026-10-19",
+     "above": 57,
      "members_counted": 99,
      "members_listed": 101,
      "survivorship": "today's Nasdaq-100 members"
@@ -382,33 +382,33 @@
     "name": "Earnings estimate revisions",
     "weight": 0.1,
     "unit": "percent",
-    "value": 18.9117,
+    "value": 18.8005,
     "score": 0,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": 18.911702,
-     "collected_on": "2026-10-19",
+     "value": 18.800523,
+     "collected_on": "2026-10-20",
      "companies": {
       "MSFT": {
-       "ntm_now": 20.978443,
-       "ntm_90d_ago": 19.587776,
-       "revision_pct": 7.099669,
+       "ntm_now": 20.97016,
+       "ntm_90d_ago": 19.596562,
+       "revision_pct": 7.009381,
        "fy0_end": "2027-06-30",
        "same_fiscal_year_revision_pct": {
-        "0y": 1.933335,
-        "+1y": 4.927794
+        "0y": 1.849998,
+        "+1y": 4.814129
        },
        "analysts": 34
       },
       "NVDA": {
-       "ntm_now": 14.033431,
-       "ntm_90d_ago": 10.735182,
-       "revision_pct": 30.723736,
+       "ntm_now": 14.051519,
+       "ntm_90d_ago": 10.75989,
+       "revision_pct": 30.591666,
        "fy0_end": "2027-01-31",
        "same_fiscal_year_revision_pct": {
-        "0y": 4.081715,
-        "+1y": 24.687099
+        "0y": 4.035669,
+        "+1y": 24.435569
        },
        "analysts": 51
       }
@@ -425,76 +425,76 @@
   "last": "2026-09",
   "correlations": {
    "qqq_3m": {
-    "spearman": 0.046,
+    "spearman": 0.068,
     "interval_90": [
-     -0.08,
-     0.161
+     -0.061,
+     0.19
     ],
     "months": 132
    },
    "qqq_6m": {
-    "spearman": 0.11,
+    "spearman": 0.118,
     "interval_90": [
-     -0.119,
-     0.253
+     -0.114,
+     0.264
     ],
     "months": 129
    },
    "qqq_12m": {
-    "spearman": 0.287,
+    "spearman": 0.281,
     "interval_90": [
-     -0.031,
-     0.536
+     -0.037,
+     0.541
     ],
     "months": 123
    },
    "qqq_maxdd_12m": {
-    "spearman": 0.333,
+    "spearman": 0.331,
     "interval_90": [
-     0.04,
+     0.039,
      0.579
     ],
     "months": 122
    },
    "soxx_12m": {
-    "spearman": 0.516,
+    "spearman": 0.512,
     "interval_90": [
-     0.193,
-     0.655
+     0.191,
+     0.65
     ],
     "months": 123
    }
   },
   "terciles": {
    "low": {
-    "months": 47,
+    "months": 46,
     "abi_range": [
      15.28,
      27.78
     ],
     "qqq_12m": 15.81,
-    "qqq_maxdd_12m": -21.49,
-    "soxx_12m": 18.17
+    "qqq_maxdd_12m": -21.62,
+    "soxx_12m": 18.05
    },
    "middle": {
-    "months": 46,
+    "months": 47,
     "abi_range": [
      29.17,
      41.67
     ],
-    "qqq_12m": 23.15,
+    "qqq_12m": 23.0,
     "qqq_maxdd_12m": -15.08,
-    "soxx_12m": 35.18
+    "soxx_12m": 34.93
    },
    "high": {
     "months": 41,
     "abi_range": [
      43.06,
-     70.83
+     73.61
     ],
-    "qqq_12m": 29.43,
+    "qqq_12m": 29.47,
     "qqq_maxdd_12m": -14.08,
-    "soxx_12m": 64.18
+    "soxx_12m": 64.28
    }
   },
   "qqq_drawdowns_20pct": [
@@ -527,8 +527,8 @@
     "abi_h6_at_peak_month": 68.06
    }
   ],
-  "months_at_60_plus": 15,
-  "false_alarm_months_60_plus": 8,
+  "months_at_60_plus": 18,
+  "false_alarm_months_60_plus": 10,
   "warning_value": {
    "passed": false,
    "rule": "the page may say the index 'has historically preceded weaker technology returns' only if the 12-month return correlation is at or below -0.20 with a bootstrap interval excluding zero, AND the high tercile's mean 12-month drawdown is deeper than the low tercile's. Otherwise it says the backtest found no reliable warning value. Either way it is never framed as a crash probability or timing signal",
@@ -604,10 +604,10 @@
   ],
   "price_change_only_count": 107,
   "check_against_official": {
-   "reconstructed_latest": 34.470881,
+   "reconstructed_latest": 35.020549,
    "reconstructed_month": "2026-09",
-   "official_today": 34.45248
+   "official_today": 34.742488
   }
  },
- "taken_at_utc": "2026-10-19T19:27:40+00:00"
+ "taken_at_utc": "2026-10-20T18:06:09+00:00"
 }
