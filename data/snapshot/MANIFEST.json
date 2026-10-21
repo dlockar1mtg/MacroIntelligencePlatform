@@ -1,129 +1,61 @@
 {
- "taken_at_utc": "2026-10-20T18:09:29+00:00",
+ "taken_at_utc": "2026-10-21T18:18:13+00:00",
  "series": {
   "PAYEMS": {
-   "rows": 813,
-   "first": "1959-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/PAYEMS"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "IC4WSA": {
-   "rows": 3116,
-   "first": "1967-01-28",
-   "last": "2026-10-10",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/IC4WSA"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "CCSA": {
-   "rows": 3118,
-   "first": "1967-01-07",
-   "last": "2026-10-03",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/CCSA"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "UNRATE": {
-   "rows": 812,
-   "first": "1959-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/UNRATE"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "T10Y3M": {
-   "rows": 11201,
-   "first": "1982-01-04",
-   "last": "2026-10-19",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/T10Y3M"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "BAMLH0A0HYM2": {
-   "rows": 793,
-   "first": "2023-10-10",
-   "last": "2026-10-19",
-   "kept_from_earlier_snapshots": 9,
-   "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "BAA10Y": {
-   "rows": 10198,
-   "first": "1986-01-02",
-   "last": "2026-10-16",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/BAA10Y"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "GACDFSA066MSFRBPHI": {
-   "rows": 702,
-   "first": "1968-05-01",
-   "last": "2026-10-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/GACDFSA066MSFRBPHI"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "PERMIT": {
-   "rows": 801,
-   "first": "1960-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/PERMIT"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "M2SL": {
-   "rows": 812,
-   "first": "1959-01-01",
-   "last": "2026-08-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/M2SL"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "UMCSENT": {
-   "rows": 658,
-   "first": "1959-05-01",
-   "last": "2026-08-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/UMCSENT"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "DCOILWTICO": {
-   "rows": 9523,
-   "first": "1986-01-02",
-   "last": "2026-10-14",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/DCOILWTICO"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "USREC": {
-   "rows": 813,
-   "first": "1959-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/USREC"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "MORTGAGE30US": {
-   "rows": 2899,
-   "first": "1971-04-02",
-   "last": "2026-10-15",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/MORTGAGE30US"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "GS10": {
-   "rows": 813,
-   "first": "1959-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/GS10"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "TB3MS": {
-   "rows": 813,
-   "first": "1959-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/TB3MS"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "BAA": {
-   "rows": 813,
-   "first": "1959-01-01",
-   "last": "2026-09-01",
-   "kept_from_earlier_snapshots": 0,
-   "source": "https://fred.stlouisfed.org/series/BAA"
+   "error": "Error tokenizing data. C error: Expected 2 fields in line 5, saw 3\n"
   },
   "^GSPC": {
    "rows": 503,
    "first": "1985-01-01",
-   "last": "2026-10-20",
+   "last": "2026-10-21",
    "source": "Yahoo Finance chart API, ^GSPC monthly close"
   }
  }
