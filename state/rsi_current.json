@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-10",
  "model_version": "2.0.0",
- "rsi": -0.5302,
- "rsi_unsuppressed": -0.5302,
+ "rsi": -0.5156,
+ "rsi_unsuppressed": -0.5156,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -14,7 +14,7 @@
   },
   "financial": {
    "weight": 0.25,
-   "score": -0.407,
+   "score": -0.4003,
    "coverage": 1.0
   },
   "real_economy": {
@@ -29,12 +29,12 @@
   },
   "market": {
    "weight": 0.1,
-   "score": -0.9348,
+   "score": -0.8904,
    "coverage": 1.0
   },
   "consumer": {
    "weight": 0.05,
-   "score": 0.83,
+   "score": 1.0,
    "coverage": 1.0
   }
  },
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 0.9629,
+   "value": 0.948,
    "score": 0.0,
    "observation_month": "2026-10",
    "status": "FLOORED_AFTER_INVERSION",
@@ -114,11 +114,11 @@
    "unit": "high-yield option-adjusted spread, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 3.186,
-   "score": -0.814,
+   "value": 3.1994,
+   "score": -0.8006,
    "observation_month": "2026-10",
    "status": "OK",
-   "contribution": -0.1017,
+   "contribution": -0.1001,
    "anchors": {
     "expansion": 3.0,
     "stress": 5.0
@@ -182,11 +182,11 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": 4.6739,
-   "score": -0.9348,
+   "value": 4.4518,
+   "score": -0.8904,
    "observation_month": "2026-10",
    "status": "OK",
-   "contribution": -0.0935,
+   "contribution": -0.089,
    "anchors": {
     "expansion": 5.0,
     "stress": -5.0
@@ -199,11 +199,11 @@
    "unit": "University of Michigan consumer sentiment",
    "within_weight": 1.0,
    "system_weight": 0.05,
-   "value": 51.7,
-   "score": 0.83,
-   "observation_month": "2026-08",
+   "value": 48.1,
+   "score": 1.0,
+   "observation_month": "2026-09",
    "status": "OK",
-   "contribution": 0.0415,
+   "contribution": 0.05,
    "anchors": {
     "expansion": 70,
     "stress": 50
