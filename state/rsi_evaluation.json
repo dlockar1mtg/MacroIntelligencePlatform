@@ -131,7 +131,7 @@
    "housing_reported": null,
    "notes": "v1 heuristic",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.416
+   "v2_recomputed_for_that_month": -0.417
   },
   {
    "as_of": "2026-05-11",
@@ -161,7 +161,7 @@
    "housing_reported": null,
    "notes": "v1 heuristic",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.613
+   "v2_recomputed_for_that_month": -0.611
   },
   {
    "as_of": "2026-06-10",
@@ -171,7 +171,7 @@
    "housing_reported": null,
    "notes": "v1 heuristic",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.613
+   "v2_recomputed_for_that_month": -0.611
   },
   {
    "as_of": "2026-06-23",
@@ -181,7 +181,7 @@
    "housing_reported": null,
    "notes": "v1 heuristic",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.613
+   "v2_recomputed_for_that_month": -0.611
   },
   {
    "as_of": "2026-07-01",
@@ -191,7 +191,7 @@
    "housing_reported": null,
    "notes": "conflicting historical estimates",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.58
+   "v2_recomputed_for_that_month": -0.577
   },
   {
    "as_of": "2026-07-10",
@@ -201,7 +201,7 @@
    "housing_reported": "69",
    "notes": "v2 category contributions sum to -0.415",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.58
+   "v2_recomputed_for_that_month": -0.577
   },
   {
    "as_of": "2026-07-17",
@@ -211,7 +211,7 @@
    "housing_reported": "66",
    "notes": "published category scores give -0.480 under the accepted weights",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.58
+   "v2_recomputed_for_that_month": -0.577
   },
   {
    "as_of": "2026-07-26",
@@ -221,7 +221,7 @@
    "housing_reported": "64",
    "notes": "Jul 24-28; category scores give -0.645",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.58
+   "v2_recomputed_for_that_month": -0.577
   },
   {
    "as_of": "2026-09",
@@ -231,7 +231,7 @@
    "housing_reported": "57",
    "notes": "no single as-of date; category scores give -0.595",
    "legacy_unverified": true,
-   "v2_recomputed_for_that_month": -0.557
+   "v2_recomputed_for_that_month": -0.553
   }
  ]
 }
