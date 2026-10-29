@@ -1,5 +1,5 @@
 {
- "taken_at_utc": "2026-10-28T19:07:37+00:00",
+ "taken_at_utc": "2026-10-29T19:14:25+00:00",
  "series": {
   "PAYEMS": {
    "rows": 813,
@@ -9,16 +9,16 @@
    "source": "https://fred.stlouisfed.org/series/PAYEMS"
   },
   "IC4WSA": {
-   "rows": 3117,
+   "rows": 3118,
    "first": "1967-01-28",
-   "last": "2026-10-17",
+   "last": "2026-10-24",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/IC4WSA"
   },
   "CCSA": {
-   "rows": 3119,
+   "rows": 3120,
    "first": "1967-01-07",
-   "last": "2026-10-10",
+   "last": "2026-10-17",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/CCSA"
   },
@@ -30,16 +30,16 @@
    "source": "https://fred.stlouisfed.org/series/UNRATE"
   },
   "T10Y3M": {
-   "rows": 11207,
+   "rows": 11208,
    "first": "1982-01-04",
-   "last": "2026-10-27",
+   "last": "2026-10-28",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/T10Y3M"
   },
   "BAMLH0A0HYM2": {
-   "rows": 799,
+   "rows": 800,
    "first": "2023-10-10",
-   "last": "2026-10-27",
+   "last": "2026-10-28",
    "kept_from_earlier_snapshots": 14,
    "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
   },
@@ -93,9 +93,9 @@
    "source": "https://fred.stlouisfed.org/series/USREC"
   },
   "MORTGAGE30US": {
-   "rows": 2900,
+   "rows": 2901,
    "first": "1971-04-02",
-   "last": "2026-10-22",
+   "last": "2026-10-29",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/MORTGAGE30US"
   },
@@ -123,7 +123,7 @@
   "^GSPC": {
    "rows": 503,
    "first": "1985-01-01",
-   "last": "2026-10-28",
+   "last": "2026-10-29",
    "source": "Yahoo Finance chart API, ^GSPC monthly close"
   }
  }
