@@ -1,7 +1,7 @@
 {
  "evaluation": {
   "since": "1990-01",
-  "months": 442,
+  "months": 443,
   "recessions": [
    {
     "recession_start": "1990-08",
@@ -102,7 +102,7 @@
    }
   ],
   "share_of_months_by_band": {
-   "EXPANSION": 0.776,
+   "EXPANSION": 0.777,
    "LATE_CYCLE": 0.106,
    "DETERIORATION": 0.063,
    "RECESSIONARY_STRESS": 0.032,
