@@ -1,5 +1,5 @@
 {
- "taken_at_utc": "2026-11-06T20:07:50+00:00",
+ "taken_at_utc": "2026-11-09T23:11:47+00:00",
  "series": {
   "PAYEMS": {
    "rows": 814,
@@ -30,23 +30,23 @@
    "source": "https://fred.stlouisfed.org/series/UNRATE"
   },
   "T10Y3M": {
-   "rows": 11214,
+   "rows": 11216,
    "first": "1982-01-04",
-   "last": "2026-11-05",
+   "last": "2026-11-09",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/T10Y3M"
   },
   "BAMLH0A0HYM2": {
-   "rows": 806,
+   "rows": 807,
    "first": "2023-10-10",
-   "last": "2026-11-05",
-   "kept_from_earlier_snapshots": 20,
+   "last": "2026-11-06",
+   "kept_from_earlier_snapshots": 23,
    "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
   },
   "BAA10Y": {
-   "rows": 10211,
+   "rows": 10213,
    "first": "1986-01-02",
-   "last": "2026-11-04",
+   "last": "2026-11-06",
    "kept_from_earlier_snapshots": 0,
    "source": "https://fred.stlouisfed.org/series/BAA10Y"
   },
@@ -123,7 +123,7 @@
   "^GSPC": {
    "rows": 504,
    "first": "1985-01-01",
-   "last": "2026-11-06",
+   "last": "2026-11-09",
    "source": "Yahoo Finance chart API, ^GSPC monthly close"
   }
  }
