@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-11",
  "model_version": "2.0.0",
- "rsi": -0.5844,
- "rsi_unsuppressed": -0.5844,
+ "rsi": -0.6049,
+ "rsi_unsuppressed": -0.6049,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -14,7 +14,7 @@
   },
   "financial": {
    "weight": 0.25,
-   "score": -0.3008,
+   "score": -0.3079,
    "coverage": 1.0
   },
   "real_economy": {
@@ -29,7 +29,7 @@
   },
   "market": {
    "weight": 0.1,
-   "score": -0.4175,
+   "score": -0.6047,
    "coverage": 1.0
   },
   "consumer": {
@@ -63,9 +63,9 @@
    "unit": "initial claims (4-week avg) per 1,000 payroll jobs",
    "within_weight": 0.35,
    "system_weight": 0.3,
-   "value": 1.2389,
+   "value": 1.2257,
    "score": -1.0,
-   "observation_month": "2026-10",
+   "observation_month": "2026-11",
    "status": "OK",
    "contribution": -0.105,
    "anchors": {
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 0.685,
+   "value": 0.6843,
    "score": 0.0,
    "observation_month": "2026-11",
    "status": "FLOORED_AFTER_INVERSION",
@@ -114,11 +114,11 @@
    "unit": "high-yield option-adjusted spread, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 3.3983,
-   "score": -0.6017,
+   "value": 3.3843,
+   "score": -0.6157,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": -0.0752,
+   "contribution": -0.077,
    "anchors": {
     "expansion": 3.0,
     "stress": 5.0
@@ -182,11 +182,11 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": 2.0874,
-   "score": -0.4175,
+   "value": 3.0236,
+   "score": -0.6047,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": -0.0418,
+   "contribution": -0.0605,
    "anchors": {
     "expansion": 5.0,
     "stress": -5.0
