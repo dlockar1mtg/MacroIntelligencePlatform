@@ -3,7 +3,7 @@
  "model_version": "1.0.0",
  "research_version": "1.0.0-R",
  "current": {
-  "as_of_date": "2026-11-12",
+  "as_of_date": "2026-11-13",
   "research": {
    "version": "1.0.0-R",
    "abi": null,
@@ -65,7 +65,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 43
+       "age_days": 44
       },
       {
        "ticker": "AMZN",
@@ -84,7 +84,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 43
+       "age_days": 44
       },
       {
        "ticker": "GOOGL",
@@ -103,7 +103,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 43
+       "age_days": 44
       },
       {
        "ticker": "META",
@@ -122,7 +122,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 43
+       "age_days": 44
       }
      ]
     }
@@ -157,7 +157,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 43
+       "age_days": 44
       },
       {
        "ticker": "AMZN",
@@ -176,7 +176,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 43
+       "age_days": 44
       },
       {
        "ticker": "GOOGL",
@@ -195,7 +195,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 43
+       "age_days": 44
       },
       {
        "ticker": "META",
@@ -214,7 +214,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 43
+       "age_days": 44
       }
      ]
     }
@@ -246,7 +246,7 @@
         "0001045810-26-000075",
         "0001045810-26-000075"
        ],
-       "age_days": 109
+       "age_days": 110
       },
       {
        "ticker": "AMD",
@@ -260,7 +260,7 @@
         "0000002488-26-000191",
         "0000002488-26-000191"
        ],
-       "age_days": 47
+       "age_days": 48
       },
       {
        "ticker": "AVGO",
@@ -274,7 +274,7 @@
         "0001730168-26-000080",
         "0001730168-26-000080"
        ],
-       "age_days": 102
+       "age_days": 103
       },
       {
        "ticker": "MU",
@@ -288,7 +288,7 @@
         "0000723125-26-000023",
         "0000723125-26-000023"
        ],
-       "age_days": 70
+       "age_days": 71
       }
      ]
     }
@@ -299,23 +299,23 @@
     "name": "Magnificent Seven concentration",
     "weight": 0.2,
     "unit": "percent of S&P 500",
-    "value": 32.6451,
+    "value": 32.602,
     "score": 75,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": 32.645109,
+     "value": 32.601976,
      "source": "SPY daily holdings (official S&P 500 weights)",
-     "holdings_as_of": "As of 11-Nov-2026",
+     "holdings_as_of": "As of 12-Nov-2026",
      "weights": {
-      "AAPL": 7.887675,
-      "NVDA": 6.39424,
-      "MSFT": 5.885292,
-      "AMZN": 3.973414,
-      "GOOGL": 2.619143,
-      "META": 2.108886,
-      "GOOG": 2.101137,
-      "TSLA": 1.675322
+      "AAPL": 7.904389,
+      "NVDA": 6.137977,
+      "MSFT": 5.926991,
+      "AMZN": 4.006244,
+      "GOOGL": 2.675267,
+      "GOOG": 2.142682,
+      "META": 2.098848,
+      "TSLA": 1.709578
      },
      "members": 503
     }
@@ -326,33 +326,33 @@
     "name": "Valuation premium vs own 10-year history",
     "weight": 0.15,
     "unit": "percent",
-    "value": -33.2517,
+    "value": -32.1735,
     "score": 0,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": -33.251717,
+     "value": -32.173497,
      "companies": {
       "NVDA": {
        "status": "OK",
-       "pe": 21.963337,
+       "pe": 21.010114,
        "baseline_pe": 58.458108,
        "baseline_months": 120,
-       "premium_pct": -62.428929
+       "premium_pct": -64.059538
       },
       "MSFT": {
        "status": "OK",
-       "pe": 27.198852,
+       "pe": 27.296451,
        "baseline_pe": 33.953793,
        "baseline_months": 120,
-       "premium_pct": -19.894511
+       "premium_pct": -19.607065
       },
       "AVGO": {
        "status": "OK",
-       "pe": 44.033163,
+       "pe": 46.474488,
        "baseline_pe": 53.329389,
        "baseline_months": 110,
-       "premium_pct": -17.431712
+       "premium_pct": -12.85389
       }
      },
      "companies_used": 3,
@@ -379,18 +379,18 @@
     "name": "Earnings estimate revisions",
     "weight": 0.1,
     "unit": "percent",
-    "value": 19.0684,
+    "value": 18.8153,
     "score": 0,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": 19.068392,
-     "collected_on": "2026-11-12",
+     "value": 18.815261,
+     "collected_on": "2026-11-13",
      "companies": {
       "MSFT": {
-       "ntm_now": 21.560382,
-       "ntm_90d_ago": 20.194329,
-       "revision_pct": 6.764533,
+       "ntm_now": 21.571839,
+       "ntm_90d_ago": 20.204824,
+       "revision_pct": 6.765785,
        "fy0_end": "2027-06-30",
        "same_fiscal_year_revision_pct": {
         "0y": 1.478091,
@@ -399,13 +399,13 @@
        "analysts": 32
       },
       "NVDA": {
-       "ntm_now": 14.479155,
-       "ntm_90d_ago": 11.021471,
-       "revision_pct": 31.372252,
+       "ntm_now": 14.437069,
+       "ntm_90d_ago": 11.032054,
+       "revision_pct": 30.864736,
        "fy0_end": "2027-01-31",
        "same_fiscal_year_revision_pct": {
-        "0y": 4.053706,
-        "+1y": 24.230245
+        "0y": 4.080386,
+        "+1y": 23.625984
        },
        "analysts": 51
       }
@@ -486,12 +486,12 @@
    "MA",
    "MAA"
   ],
-  "price_change_only_count": 108,
+  "price_change_only_count": 107,
   "check_against_official": {
-   "reconstructed_latest": 33.236706,
+   "reconstructed_latest": 33.146598,
    "reconstructed_month": "2026-10",
-   "official_today": 32.645109
+   "official_today": 32.601976
   }
  },
- "taken_at_utc": "2026-11-12T21:03:38+00:00"
+ "taken_at_utc": "2026-11-13T20:38:10+00:00"
 }
