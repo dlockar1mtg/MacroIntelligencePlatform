@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-11",
  "model_version": "2.0.0",
- "rsi": -0.5963,
- "rsi_unsuppressed": -0.5963,
+ "rsi": -0.5673,
+ "rsi_unsuppressed": -0.5673,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -14,7 +14,7 @@
   },
   "financial": {
    "weight": 0.25,
-   "score": -0.3194,
+   "score": -0.329,
    "coverage": 1.0
   },
   "real_economy": {
@@ -29,7 +29,7 @@
   },
   "market": {
    "weight": 0.1,
-   "score": -0.49,
+   "score": -0.1757,
    "coverage": 1.0
   },
   "consumer": {
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 0.6963,
+   "value": 0.718,
    "score": 0.0,
    "observation_month": "2026-11",
    "status": "FLOORED_AFTER_INVERSION",
@@ -114,11 +114,11 @@
    "unit": "high-yield option-adjusted spread, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 3.3613,
-   "score": -0.6387,
+   "value": 3.342,
+   "score": -0.658,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": -0.0798,
+   "contribution": -0.0823,
    "anchors": {
     "expansion": 3.0,
     "stress": 5.0
@@ -182,11 +182,11 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": 2.45,
-   "score": -0.49,
+   "value": 0.8787,
+   "score": -0.1757,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": -0.049,
+   "contribution": -0.0176,
    "anchors": {
     "expansion": 5.0,
     "stress": -5.0
