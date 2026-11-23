@@ -19,7 +19,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from http.cookiejar import CookieJar
 from pathlib import Path
 
@@ -47,7 +47,10 @@ START = "2002-01-01"
 SEC_UA = os.environ.get("SEC_USER_AGENT") or "MacroIntelligencePlatform research github.com/dlockar1mtg/MacroIntelligencePlatform"
 WEB_UA = "Mozilla/5.0 (X11; Linux x86_64) MacroIntelligencePlatform/1.0 (personal research)"
 SPY_URL = "https://www.ssga.com/us/en/intermediary/etfs/library-content/products/fund-data/etfs/us/holdings-daily-us-en-spy.xlsx"
-NDX_URL = "https://en.wikipedia.org/wiki/Nasdaq-100"
+NDX_LIST_URL = "https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies"  # holds the members table since ~Oct 2026
+NDX_URL = "https://en.wikipedia.org/wiki/Nasdaq-100"  # held it before; kept as a second try
+NDX_SNAPSHOT = Path(__file__).resolve().parents[1] / "data" / "reference" / "ndx_members_snapshot.json"
+NDX_SNAPSHOT_MAX_DAYS = 400  # the index reconstitutes once a year (December), plus occasional swaps
 SPX_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
 
 
@@ -166,8 +169,26 @@ def _wiki_table(f: Fetcher, url: str, need: tuple[str, ...], min_rows: int = 90)
     raise RuntimeError(f"no table with {need} at {url}; tables seen: {seen[:8]}")
 
 
-def ndx_members(f: Fetcher) -> pd.DataFrame:
-    """Nasdaq-100 members today: Nasdaq's own list first, else the Wikipedia components table."""
+def _ndx_from_html(html: str) -> pd.DataFrame | None:
+    """The 95-110 row ticker column of a Nasdaq-100 members table, preferring the table with id 'constituents'."""
+    tables = pd.read_html(io.StringIO(html), attrs={"id": "constituents"}) if 'id="constituents"' in html else []
+    tables = tables + pd.read_html(io.StringIO(html))
+    for t in tables:
+        if not 95 <= len(t) <= 110:
+            continue
+        for c in t.columns:
+            vals = t[c].astype(str).str.strip().str.upper().str.replace(".", "-", regex=False)
+            if vals.str.fullmatch(r"[A-Z]{1,5}(-[A-Z])?").mean() > 0.9:
+                out = pd.DataFrame({"ticker": vals[vals.str.fullmatch(r"[A-Z]{1,5}(-[A-Z])?")]}).drop_duplicates()
+                out.attrs["column"] = str(c)
+                return out
+    return None
+
+
+def ndx_members(f: Fetcher, snapshot: Path = NDX_SNAPSHOT, today: date | None = None) -> pd.DataFrame:
+    """Nasdaq-100 members today. In order: Nasdaq's own list (403s from GitHub's runners), Wikipedia's
+    'List of NASDAQ-100 companies' page, the Nasdaq-100 article (which held the table until ~Oct 2026), and
+    last a committed snapshot no older than NDX_SNAPSHOT_MAX_DAYS. out.attrs['source'] says which was used."""
     errors = []
     try:
         doc = json.loads(f.get("https://api.nasdaq.com/api/quote/list-type/nasdaq100",
@@ -182,17 +203,29 @@ def ndx_members(f: Fetcher) -> pd.DataFrame:
         errors.append(f"nasdaq api returned {len(tick)} symbols")
     except Exception as exc:  # noqa: BLE001
         errors.append(f"nasdaq api: {exc}")
-    html = f.get(NDX_URL, {"Accept": "text/html"}).decode("utf-8", "replace")
-    for t in pd.read_html(io.StringIO(html)):
-        if not 95 <= len(t) <= 110:
+    for label, url in (("Wikipedia List of NASDAQ-100 companies", NDX_LIST_URL), ("Wikipedia Nasdaq-100 article", NDX_URL)):
+        try:
+            out = _ndx_from_html(f.get(url, {"Accept": "text/html"}).decode("utf-8", "replace"))
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{label}: {exc}")
             continue
-        for c in t.columns:
-            vals = t[c].astype(str).str.strip().str.upper().str.replace(".", "-", regex=False)
-            if vals.str.fullmatch(r"[A-Z]{1,5}(-[A-Z])?").mean() > 0.9:
-                out = pd.DataFrame({"ticker": vals[vals.str.fullmatch(r"[A-Z]{1,5}(-[A-Z])?")]}).drop_duplicates()
-                out.attrs["source"] = f"Wikipedia Nasdaq-100 components (column {c})"
-                return out
-    raise RuntimeError("; ".join(errors) + "; no 95-110 row ticker table on Wikipedia")
+        if out is not None:
+            out.attrs["source"] = f"{label} (column {out.attrs.pop('column', '?')})"
+            return out
+        errors.append(f"{label}: no 95-110 row ticker table")
+    try:
+        snap = json.loads(Path(snapshot).read_text(encoding="utf-8"))
+        age = ((today or date.today()) - date.fromisoformat(snap["as_of"])).days
+        tick = [str(t).strip().upper() for t in snap["tickers"]]
+        if 0 <= age <= NDX_SNAPSHOT_MAX_DAYS and 95 <= len(tick) <= 110:
+            out = pd.DataFrame({"ticker": tick}).drop_duplicates()
+            out.attrs["source"] = f"committed snapshot as of {snap['as_of']} ({age} days old)"
+            out.attrs["fallback_errors"] = "; ".join(errors)
+            return out
+        errors.append(f"snapshot as of {snap['as_of']} is {age} days old (limit {NDX_SNAPSHOT_MAX_DAYS})")
+    except Exception as exc:  # noqa: BLE001
+        errors.append(f"snapshot: {exc}")
+    raise RuntimeError("; ".join(errors))
 
 
 def spx_members_wiki(f: Fetcher) -> pd.DataFrame:
@@ -304,7 +337,9 @@ def save_snapshot(directory: Path, archive: Path | None = None, f: Fetcher | Non
     ndx = step("ndx_members", lambda: ndx_members(f))
     if ndx is not None:
         ndx.to_csv(d / "ndx_members.csv", index=False)
-        man["files"]["ndx_members.csv"] = {"rows": len(ndx), "source": ndx.attrs.get("source", NDX_URL)}
+        man["files"]["ndx_members.csv"] = {"rows": len(ndx), "source": ndx.attrs.get("source", NDX_URL),
+                                           **({"live_sources_failed": ndx.attrs["fallback_errors"][:300]}
+                                              if ndx.attrs.get("fallback_errors") else {})}
     tick_map = step("sec_tickers", lambda: sec_tickers(f))
     frames = step("sec_share_frames", lambda: sec_share_frames(f))
     if tick_map:
