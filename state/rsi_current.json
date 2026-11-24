@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-11",
  "model_version": "2.0.0",
- "rsi": -0.477,
- "rsi_unsuppressed": -0.477,
+ "rsi": -0.4785,
+ "rsi_unsuppressed": -0.4785,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -14,7 +14,7 @@
   },
   "financial": {
    "weight": 0.25,
-   "score": -0.302,
+   "score": -0.2947,
    "coverage": 1.0
   },
   "real_economy": {
@@ -24,12 +24,12 @@
   },
   "liquidity": {
    "weight": 0.1,
-   "score": -0.8066,
+   "score": -0.9289,
    "coverage": 1.0
   },
   "market": {
    "weight": 0.1,
-   "score": 0.2642,
+   "score": 0.3529,
    "coverage": 1.0
   },
   "consumer": {
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 0.702,
+   "value": 0.6925,
    "score": 0.0,
    "observation_month": "2026-11",
    "status": "FLOORED_AFTER_INVERSION",
@@ -114,11 +114,11 @@
    "unit": "high-yield option-adjusted spread, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 3.396,
-   "score": -0.604,
+   "value": 3.4106,
+   "score": -0.5894,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": -0.0755,
+   "contribution": -0.0737,
    "anchors": {
     "expansion": 3.0,
     "stress": 5.0
@@ -165,11 +165,11 @@
    "unit": "M2, % change on a year earlier",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": 5.7099,
-   "score": -0.8066,
-   "observation_month": "2026-09",
+   "value": 5.8934,
+   "score": -0.9289,
+   "observation_month": "2026-10",
    "status": "OK",
-   "contribution": -0.0807,
+   "contribution": -0.0929,
    "anchors": {
     "expansion": 6.0,
     "stress": 3.0
@@ -182,11 +182,11 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": -1.3209,
-   "score": 0.2642,
+   "value": -1.7645,
+   "score": 0.3529,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": 0.0264,
+   "contribution": 0.0353,
    "anchors": {
     "expansion": 5.0,
     "stress": -5.0
