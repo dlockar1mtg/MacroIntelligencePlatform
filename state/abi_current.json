@@ -3,7 +3,7 @@
  "model_version": "1.0.0",
  "research_version": "1.0.0-R",
  "current": {
-  "as_of_date": "2026-11-23",
+  "as_of_date": "2026-11-24",
   "research": {
    "version": "1.0.0-R",
    "abi": 55.0,
@@ -63,7 +63,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 54
+       "age_days": 55
       },
       {
        "ticker": "AMZN",
@@ -82,7 +82,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 54
+       "age_days": 55
       },
       {
        "ticker": "GOOGL",
@@ -101,7 +101,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 54
+       "age_days": 55
       },
       {
        "ticker": "META",
@@ -120,7 +120,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 54
+       "age_days": 55
       }
      ]
     }
@@ -155,7 +155,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 54
+       "age_days": 55
       },
       {
        "ticker": "AMZN",
@@ -174,7 +174,7 @@
         "reported",
         "reported"
        ],
-       "age_days": 54
+       "age_days": 55
       },
       {
        "ticker": "GOOGL",
@@ -193,7 +193,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 54
+       "age_days": 55
       },
       {
        "ticker": "META",
@@ -212,7 +212,7 @@
         "reported",
         "year-to-date 272.0 days minus the previous"
        ],
-       "age_days": 54
+       "age_days": 55
       }
      ]
     }
@@ -244,7 +244,7 @@
         "0001045810-26-000075",
         "0001045810-26-000075"
        ],
-       "age_days": 120
+       "age_days": 121
       },
       {
        "ticker": "AMD",
@@ -258,7 +258,7 @@
         "0000002488-26-000191",
         "0000002488-26-000191"
        ],
-       "age_days": 58
+       "age_days": 59
       },
       {
        "ticker": "AVGO",
@@ -272,7 +272,7 @@
         "0001730168-26-000080",
         "0001730168-26-000080"
        ],
-       "age_days": 113
+       "age_days": 114
       },
       {
        "ticker": "MU",
@@ -286,7 +286,7 @@
         "0000723125-26-000023",
         "0000723125-26-000023"
        ],
-       "age_days": 81
+       "age_days": 82
       }
      ]
     }
@@ -382,32 +382,32 @@
     "name": "Earnings estimate revisions",
     "weight": 0.1,
     "unit": "percent",
-    "value": 21.2785,
+    "value": 21.2693,
     "score": 0,
     "status": "OK",
     "detail": {
      "status": "OK",
-     "value": 21.27852,
-     "collected_on": "2026-11-23",
+     "value": 21.26931,
+     "collected_on": "2026-11-24",
      "companies": {
       "MSFT": {
-       "ntm_now": 21.688664,
-       "ntm_90d_ago": 20.31868,
-       "revision_pct": 6.742483,
+       "ntm_now": 21.719771,
+       "ntm_90d_ago": 20.349642,
+       "revision_pct": 6.732936,
        "fy0_end": "2027-06-30",
        "same_fiscal_year_revision_pct": {
-        "0y": 1.444737,
-        "+1y": 2.662167
+        "0y": 1.394771,
+        "+1y": 2.776576
        },
        "analysts": 32
       },
       "NVDA": {
-       "ntm_now": 15.294085,
-       "ntm_90d_ago": 11.261006,
-       "revision_pct": 35.814558,
+       "ntm_now": 15.313088,
+       "ntm_90d_ago": 11.275734,
+       "revision_pct": 35.805683,
        "fy0_end": "2027-01-31",
        "same_fiscal_year_revision_pct": {
-        "0y": 7.329021,
+        "0y": 7.22464,
         "+1y": 27.740588
        },
        "analysts": 53
@@ -427,40 +427,40 @@
    "qqq_3m": {
     "spearman": 0.028,
     "interval_90": [
-     -0.089,
-     0.162
+     -0.09,
+     0.161
     ],
     "months": 133
    },
    "qqq_6m": {
-    "spearman": 0.109,
+    "spearman": 0.105,
     "interval_90": [
      -0.1,
-     0.26
+     0.257
     ],
     "months": 130
    },
    "qqq_12m": {
-    "spearman": 0.272,
+    "spearman": 0.269,
     "interval_90": [
      -0.025,
-     0.544
+     0.538
     ],
     "months": 124
    },
    "qqq_maxdd_12m": {
-    "spearman": 0.362,
+    "spearman": 0.357,
     "interval_90": [
-     0.072,
-     0.589
+     0.067,
+     0.583
     ],
     "months": 123
    },
    "soxx_12m": {
-    "spearman": 0.514,
+    "spearman": 0.511,
     "interval_90": [
-     0.22,
-     0.677
+     0.218,
+     0.673
     ],
     "months": 124
    }
@@ -604,10 +604,10 @@
   ],
   "price_change_only_count": 107,
   "check_against_official": {
-   "reconstructed_latest": 31.852405,
+   "reconstructed_latest": 31.947282,
    "reconstructed_month": "2026-10",
    "official_today": 31.972798
   }
  },
- "taken_at_utc": "2026-11-23T19:52:28+00:00"
+ "taken_at_utc": "2026-11-24T01:10:27+00:00"
 }

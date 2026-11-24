@@ -1,8 +1,8 @@
 {
  "as_of_month": "2026-11",
  "model_version": "2.0.0",
- "rsi": -0.4767,
- "rsi_unsuppressed": -0.4767,
+ "rsi": -0.477,
+ "rsi_unsuppressed": -0.477,
  "band": "EXPANSION",
  "coverage": 1.0,
  "headline_status": "PUBLISHED",
@@ -29,7 +29,7 @@
   },
   "market": {
    "weight": 0.1,
-   "score": 0.2665,
+   "score": 0.2642,
    "coverage": 1.0
   },
   "consumer": {
@@ -97,7 +97,7 @@
    "unit": "10-year minus 3-month, percentage points",
    "within_weight": 0.5,
    "system_weight": 0.25,
-   "value": 0.7129,
+   "value": 0.702,
    "score": 0.0,
    "observation_month": "2026-11",
    "status": "FLOORED_AFTER_INVERSION",
@@ -182,11 +182,11 @@
    "unit": "S&P 500 month-end close vs its 10-month average, %",
    "within_weight": 1.0,
    "system_weight": 0.1,
-   "value": -1.3325,
-   "score": 0.2665,
+   "value": -1.3209,
+   "score": 0.2642,
    "observation_month": "2026-11",
    "status": "OK",
-   "contribution": 0.0267,
+   "contribution": 0.0264,
    "anchors": {
     "expansion": 5.0,
     "stress": -5.0
